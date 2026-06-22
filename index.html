@@ -547,13 +547,94 @@ function CaptureForm({ config, records, hasPlan, mainImg, user, device, onSave }
         React.createElement("button", { onClick: submit, className: "w-full rounded-lg bg-amber-400 text-slate-950 font-semibold py-3 hover:bg-amber-300" }, "Save record"),
         React.createElement("p", { className: "text-[11px] text-slate-500 text-center" }, "Pick a registered plant ID and its pin (and sheet) come across automatically.")));
 }
+function ZoomPan({ src, alt, placing, onTap, children }) {
+    const wrap = useRef(null), inner = useRef(null);
+    const st = useRef({ s: 1, tx: 0, ty: 0 }), g = useRef(null), lastTouch = useRef(0);
+    const placingRef = useRef(placing);
+    placingRef.current = placing;
+    const onTapRef = useRef(onTap);
+    onTapRef.current = onTap;
+    const [ratio, setRatio] = useState(null), [zoomed, setZoomed] = useState(false);
+    useEffect(() => {
+        const el = wrap.current;
+        if (!el)
+            return;
+        const apply = () => { if (inner.current)
+            inner.current.style.transform = `translate(${st.current.tx}px,${st.current.ty}px) scale(${st.current.s})`; setZoomed(st.current.s > 1.01); };
+        const cs = (s) => Math.min(6, Math.max(1, s));
+        const clampT = () => { const w = el.clientWidth, h = el.clientHeight, s = st.current.s; st.current.tx = Math.min(0, Math.max(w - w * s, st.current.tx)); st.current.ty = Math.min(0, Math.max(h - h * s, st.current.ty)); };
+        const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+        const start = (e) => { const r = el.getBoundingClientRect(); if (e.touches.length === 2) {
+            const [a, b] = e.touches;
+            g.current = { mode: "pinch", d0: dist(a, b), mx: (a.clientX + b.clientX) / 2 - r.left, my: (a.clientY + b.clientY) / 2 - r.top, s0: st.current.s, tx0: st.current.tx, ty0: st.current.ty };
+        }
+        else if (e.touches.length === 1) {
+            const t = e.touches[0];
+            g.current = { mode: "pan", sx: t.clientX, sy: t.clientY, tx0: st.current.tx, ty0: st.current.ty, moved: false };
+        } };
+        const move = (e) => { if (!g.current)
+            return; if (g.current.mode === "pinch" && e.touches.length === 2) {
+            e.preventDefault();
+            const [a, b] = e.touches;
+            const s = cs(g.current.s0 * dist(a, b) / (g.current.d0 || 1));
+            st.current.s = s;
+            st.current.tx = g.current.mx - (g.current.mx - g.current.tx0) * (s / g.current.s0);
+            st.current.ty = g.current.my - (g.current.my - g.current.ty0) * (s / g.current.s0);
+            clampT();
+            apply();
+        }
+        else if (g.current.mode === "pan" && e.touches.length === 1) {
+            if (st.current.s <= 1.01 && !placingRef.current)
+                return;
+            e.preventDefault();
+            const t = e.touches[0];
+            const dx = t.clientX - g.current.sx, dy = t.clientY - g.current.sy;
+            if (Math.abs(dx) > 6 || Math.abs(dy) > 6)
+                g.current.moved = true;
+            if (st.current.s > 1.01) {
+                st.current.tx = g.current.tx0 + dx;
+                st.current.ty = g.current.ty0 + dy;
+                clampT();
+                apply();
+            }
+        } };
+        const end = (e) => { if (!g.current)
+            return; lastTouch.current = Date.now(); if (e.touches.length === 0) {
+            if (g.current.mode === "pan" && !g.current.moved && placingRef.current && onTapRef.current) {
+                const r = el.getBoundingClientRect(), t = e.changedTouches[0], px = t.clientX - r.left, py = t.clientY - r.top;
+                onTapRef.current(+Math.min(1, Math.max(0, ((px - st.current.tx) / st.current.s) / r.width)).toFixed(4), +Math.min(1, Math.max(0, ((py - st.current.ty) / st.current.s) / r.height)).toFixed(4));
+            }
+            else if (g.current.moved)
+                e.preventDefault();
+            g.current = null;
+        }
+        else {
+            const t = e.touches[0];
+            g.current = { mode: "pan", sx: t.clientX, sy: t.clientY, tx0: st.current.tx, ty0: st.current.ty, moved: true };
+        } };
+        el.addEventListener("touchstart", start, { passive: false });
+        el.addEventListener("touchmove", move, { passive: false });
+        el.addEventListener("touchend", end, { passive: false });
+        el.__reset = () => { st.current = { s: 1, tx: 0, ty: 0 }; apply(); };
+        return () => { el.removeEventListener("touchstart", start); el.removeEventListener("touchmove", move); el.removeEventListener("touchend", end); };
+    }, []);
+    const reset = () => wrap.current && wrap.current.__reset && wrap.current.__reset();
+    const onWheel = (e) => { e.preventDefault(); const el = wrap.current, r = el.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, ns = Math.min(6, Math.max(1, st.current.s * (e.deltaY < 0 ? 1.15 : 1 / 1.15))); st.current.tx = mx - (mx - st.current.tx) * (ns / st.current.s); st.current.ty = my - (my - st.current.ty) * (ns / st.current.s); st.current.s = ns; const w = el.clientWidth, h = el.clientHeight; st.current.tx = Math.min(0, Math.max(w - w * ns, st.current.tx)); st.current.ty = Math.min(0, Math.max(h - h * ns, st.current.ty)); if (inner.current)
+        inner.current.style.transform = `translate(${st.current.tx}px,${st.current.ty}px) scale(${ns})`; setZoomed(ns > 1.01); };
+    const onClick = (e) => { if (!placing || !onTap || Date.now() - lastTouch.current < 700)
+        return; const el = wrap.current, r = el.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top; onTap(+Math.min(1, Math.max(0, ((px - st.current.tx) / st.current.s) / r.width)).toFixed(4), +Math.min(1, Math.max(0, ((py - st.current.ty) / st.current.s) / r.height)).toFixed(4)); };
+    return (React.createElement("div", { className: "relative" },
+        React.createElement("div", { ref: wrap, onWheel: onWheel, onClick: onClick, style: { aspectRatio: ratio || undefined, minHeight: ratio ? undefined : 220, touchAction: "none" }, className: `relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950 ${placing ? "cursor-crosshair" : ""}` },
+            React.createElement("div", { ref: inner, className: "absolute inset-0 origin-top-left will-change-transform" },
+                React.createElement("img", { src: src, alt: alt, draggable: false, onLoad: (e) => { const im = e.target; if (im.naturalWidth)
+                        setRatio(im.naturalWidth + " / " + im.naturalHeight); }, className: "w-full h-full select-none pointer-events-none" }),
+                children)),
+        zoomed && React.createElement("button", { onClick: reset, className: "absolute right-2 bottom-2 text-[11px] bg-slate-900/90 border border-slate-600 rounded-lg px-2 py-1 text-slate-200" }, "Reset zoom"),
+        placing && React.createElement("div", { className: "absolute left-2 top-2 text-[11px] bg-slate-900/85 border border-amber-400/40 text-amber-200 rounded-lg px-2 py-1 pointer-events-none" }, "Pinch to zoom \u00B7 drag to pan \u00B7 tap to drop")));
+}
 function PlanPicker({ img, pin, onPin }) {
-    const ref = useRef(null);
-    const click = (e) => { const r = ref.current.getBoundingClientRect(); onPin({ x: +((e.clientX - r.left) / r.width).toFixed(4), y: +((e.clientY - r.top) / r.height).toFixed(4) }); };
-    return React.createElement("div", { ref: ref, onClick: click, className: "relative rounded-xl overflow-hidden border border-slate-700 cursor-crosshair" },
-        React.createElement("img", { src: img, alt: "plan", className: "w-full select-none" }),
-        pin && React.createElement("div", { className: "absolute -translate-x-1/2 -translate-y-full", style: { left: pin.x * 100 + "%", top: pin.y * 100 + "%" } },
-            React.createElement(MapPin, { size: 28, className: "text-amber-400", fill: "#fbbf24" })));
+    return (React.createElement(ZoomPan, { src: img, alt: "plan", placing: true, onTap: (x, y) => onPin({ x, y }) }, pin && React.createElement("div", { className: "absolute -translate-x-1/2 -translate-y-full", style: { left: pin.x * 100 + "%", top: pin.y * 100 + "%" } },
+        React.createElement(MapPin, { size: 28, className: "text-amber-400", fill: "#fbbf24" }))));
 }
 /* ================= REGISTER ================= */
 function Register({ records, user, config, onOpen }) {
@@ -680,7 +761,6 @@ function PlanView({ plan, config, sheetImgs, records, plants, onOpen, onPlan, on
     const [mode, setMode] = useState("records");
     const [active, setActive] = useState(null);
     const [allTags, setAllTags] = useState(false);
-    const ref = useRef(null);
     useEffect(() => { if (!sheets.find((s) => s.key === sheetKey))
         setSheetKey(sheets[0]?.key); }, [sheets, sheetKey]);
     const sheet = sheets.find((s) => s.key === sheetKey);
@@ -689,8 +769,6 @@ function PlanView({ plan, config, sheetImgs, records, plants, onOpen, onPlan, on
     const matchArea = (p) => sheet && (p.area || "").toLowerCase() === sheet.name.toLowerCase();
     const candidates = reg.filter((p) => p.x == null && (allTags || matchArea(p)));
     const pinned = records.filter((r) => r.pin && r.reviewState !== "superseded" && pinSheet(r) === sheetKey);
-    const tap = (e) => { if (mode !== "place" || !active)
-        return; const r = ref.current.getBoundingClientRect(); onPlace(active, { sheet: sheetKey, x: +((e.clientX - r.left) / r.width).toFixed(4), y: +((e.clientY - r.top) / r.height).toFixed(4) }); setActive(null); };
     if (sheets.length === 0)
         return (React.createElement("div", { className: "space-y-4" },
             React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
@@ -727,8 +805,7 @@ function PlanView({ plan, config, sheetImgs, records, plants, onOpen, onPlan, on
             React.createElement("div", { className: "flex gap-1.5 overflow-x-auto pb-1" }, [...candidates, ...onThis].map((p) => (React.createElement("button", { key: p.key, onClick: () => setActive(p.key), className: `whitespace-nowrap text-xs font-mono px-2.5 py-1.5 rounded-full border ${active === p.key ? "bg-amber-400 text-slate-950 border-amber-400" : p.x != null ? "border-emerald-500/40 text-emerald-300" : "border-slate-600 text-slate-300"}` },
                 p.x != null && "✓ ",
                 p.plantId)))))))),
-        sheet?.img ? (React.createElement("div", { ref: ref, onClick: tap, className: `relative rounded-xl overflow-hidden border border-slate-700 ${mode === "place" && active ? "cursor-crosshair" : ""}` },
-            React.createElement("img", { src: sheet.img, alt: sheet.name, className: "w-full" }),
+        sheet?.img ? (React.createElement(ZoomPan, { src: sheet.img, alt: sheet.name, placing: mode === "place" && !!active, onTap: (x, y) => { onPlace(active, { sheet: sheetKey, x, y }); setActive(null); } },
             mode === "records" && pinned.map((r) => { const col = r.status === "defect" ? (SEVERITIES[r.severity]?.color || "#ef4444") : STATUSES[r.status].color; return React.createElement("button", { key: r.id, onClick: () => onOpen(r), className: "absolute -translate-x-1/2 -translate-y-full", style: { left: r.pin.x * 100 + "%", top: r.pin.y * 100 + "%" } },
                 React.createElement(MapPin, { size: 24, fill: col, style: { color: col } })); }),
             mode === "place" && onThis.map((p) => (React.createElement("div", { key: p.key, className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center", style: { left: p.x * 100 + "%", top: p.y * 100 + "%" } },
@@ -939,16 +1016,42 @@ function Setup({ config, onConfig, records, plan, onPlan, sheetImgs, onAddSheet,
         download(new Blob([cols.join(",") + "\n" + rows.join("\n")], { type: "text/csv" }), `${(project?.name || "SiteQA").replace(/\s+/g, "_")}_register_${Date.now()}.csv`);
     };
     const exportJSON = () => download(new Blob([JSON.stringify({ version: 3, config, records, plan }, null, 2)], { type: "application/json" }), `${(project?.name || "SiteQA").replace(/\s+/g, "_")}_backup_${Date.now()}.json`);
-    const importJSON = async (file) => { try {
-        const data = JSON.parse(await file.text());
+    const importJSON = async (file) => {
+        let data;
+        try {
+            data = JSON.parse(await file.text());
+        }
+        catch {
+            alert("Couldn't read that file as JSON.");
+            return;
+        }
+        if (Array.isArray(data)) {
+            const valid = data.filter((s) => s && s.name && s.dataUrl);
+            if (valid.length) {
+                await onImportSheets(valid);
+                alert(`Imported ${valid.length} plan sheets into "${project?.name}". Open the Plan tab to see them.`);
+            }
+            else
+                alert("That looks like a JSON list but not a sheets bundle.");
+            return;
+        }
+        const cfg = data.config;
+        const plantN = cfg?.plants?.length || 0;
+        const recN = (data.records || []).length;
         if (data.plan)
             onPlan(data.plan);
-        await onImport(data.records || [], data.config);
-        alert(`Imported ${data.records?.length || 0} records into "${project?.name}".`);
-    }
-    catch {
-        alert("Couldn't read that as a SiteQA backup.");
-    } };
+        await onImport(data.records || [], cfg);
+        const parts = [];
+        if (plantN)
+            parts.push(`${plantN} plant items`);
+        if (data.plan?.dataUrl)
+            parts.push("site plan");
+        if (recN)
+            parts.push(`${recN} records`);
+        alert(parts.length
+            ? `Loaded ${parts.join(" + ")} into "${project?.name}". Check Setup \u2192 Plant register and the Plan tab.`
+            : "Nothing recognised in that file \u2014 expected a SiteQA seed or backup.");
+    };
     const importSheetsFile = async (file) => { try {
         const arr = JSON.parse(await file.text());
         if (!Array.isArray(arr))
@@ -1088,7 +1191,11 @@ if (_el)
 
 </script>
 <script>
-if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{})); }
+if ("serviceWorker" in navigator) {
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (refreshing) return; refreshing = true; location.reload(); });
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").then(r => r.update()).catch(()=>{}));
+}
 </script>
 </body>
 </html>
