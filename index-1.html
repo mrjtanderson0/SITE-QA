@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<title>SiteQA</title>
+<meta name="theme-color" content="#0f172a" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="SiteQA" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="apple-touch-icon" href="data:image/png;base64,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" />
+<link rel="icon" href="data:image/png;base64,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" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="importmap">
+{ "imports": {
+  "react": "https://esm.sh/react@18.3.1",
+  "react/": "https://esm.sh/react@18.3.1/",
+  "react-dom": "https://esm.sh/react-dom@18.3.1?external=react",
+  "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?external=react",
+  "lucide-react": "https://esm.sh/lucide-react@0.383.0?external=react",
+  "idb-keyval": "https://esm.sh/idb-keyval@6.2.1"
+} }
+</script>
+<style> html,body,#root{height:100%} body{margin:0;background:#020617} </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="module">
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { Camera, ClipboardList, Map as MapIcon, BarChart3, Settings, AlertTriangle, CheckCircle2, Eye, MapPin, Crosshair, X, Trash2, Download, Upload, Plus, Search, ChevronLeft, Image as ImageIcon, CircleDot, Wrench, Pencil, RefreshCw, Cloud, CloudOff, GitMerge, Users, LogOut, Locate, ListChecks, Database, Building2, Layers, Check } from "lucide-react";
+import { get as idbGet, set as idbSet, del as idbDel, keys as idbKeys } from "idb-keyval";
+import { createRoot } from "react-dom/client";
+/* ================================================================== *
+ *  SiteQA — HV substation QA register
+ *  Separate databases per site · offline-first · multi-user · sync
+ *  Double-up flagging · plant register · owner & work-element tagging
+ *  Multiple per-bay plan sheets (place each tag on its own detail)
+ * ================================================================== */
+const store = {
+    ok: true,
+    async set(k, v) { try {
+        await idbSet(k, v);
+    }
+    catch (e) { } },
+    async get(k) { try {
+        const r = await idbGet(k);
+        return r === undefined ? null : r;
+    }
+    catch {
+        return null;
+    } },
+    async del(k) { try {
+        await idbDel(k);
+    }
+    catch { } },
+    async keys(p) { try {
+        return (await idbKeys()).filter((k) => typeof k === "string" && k.startsWith(p));
+    }
+    catch {
+        return [];
+    } },
+};
+const syncAdapter = { available: false, async push() { }, async pull() { return []; }, async remove() { } };
+const G_PROJECTS = "qa:projects", G_ACTIVE = "qa:active", USER = "qa:user", DEVICE = "qa:device";
+const pKey = (pid, suf) => `qa:p:${pid}:${suf}`;
+const DEFAULT_CONFIG = {
+    sites: ["GUGAA 500/330 kV Substation", "Wagga 330 kV Substation", "Maragle 330 kV SS"],
+    areas: ["Switchyard", "Diameter A", "Diameter B", "Diameter C", "Diameter D", "Transformer Bay", "Reactor Bay", "Control Building", "Cable Trench", "Earth Grid", "Laydown"],
+    equipment: ["Circuit Breaker", "Disconnector", "Earth Switch", "Current Transformer", "Voltage Transformer", "Power Transformer", "Auxiliary Transformer", "Reactor", "NER", "Surge Arrester", "Busbar", "Conductor / Stringing", "Marshalling Box / Kiosk", "Protection Panel", "Cable & Glanding", "Earthing & Bonding", "Steel Structure", "Civil / Foundation", "Signage / Labelling", "Other"],
+    categories: ["Mechanical", "Electrical / Connection", "Torque / Fasteners", "Earthing / Bonding", "Corrosion / Galvanising", "Paint / Coating", "Oil / SF6 / Gas Leak", "Cabling / Glanding", "Labelling / Identification", "Cleanliness / FOD", "Damage", "Documentation / ITP", "Other"],
+    elements: ["Footing", "Structural Steel", "Conduit", "Cable Tray", "Cabling", "Termination", "Overhead Connection", "Plant", "Earthing", "Other"],
+    owners: ["Principal Contractor", "OEM", "Subcontractor", "Client"],
+    inspectors: [], dismissed: [], plants: [], sheets: [],
+};
+const STATUSES = {
+    conforming: { label: "Conforming", color: "#10b981", chip: "bg-emerald-500/15 text-emerald-300 border-emerald-500/40", Icon: CheckCircle2 },
+    observation: { label: "Observation", color: "#38bdf8", chip: "bg-sky-500/15 text-sky-300 border-sky-500/40", Icon: Eye },
+    defect: { label: "Defect", color: "#ef4444", chip: "bg-red-500/15 text-red-300 border-red-500/40", Icon: AlertTriangle },
+};
+const SEVERITIES = {
+    Critical: { color: "#ef4444", chip: "bg-red-500/20 text-red-300 border-red-500/50" },
+    Major: { color: "#f97316", chip: "bg-orange-500/20 text-orange-300 border-orange-500/50" },
+    Minor: { color: "#fbbf24", chip: "bg-amber-400/20 text-amber-200 border-amber-400/50" },
+};
+const normId = (s) => (s || "").trim().toUpperCase().replace(/\s+/g, "");
+function compressImage(file, maxDim = 1280, quality = 0.6) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            let { width, height } = img;
+            if (width > height && width > maxDim) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+            }
+            else if (height >= width && height > maxDim) {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+            }
+            const c = document.createElement("canvas");
+            c.width = width;
+            c.height = height;
+            c.getContext("2d").drawImage(img, 0, 0, width, height);
+            URL.revokeObjectURL(url);
+            resolve(c.toDataURL("image/jpeg", quality));
+        };
+        img.onerror = reject;
+        img.src = url;
+    });
+}
+const rid = () => Math.random().toString(36).slice(2, 8);
+const initialsOf = (n) => { const p = (n || "").trim().split(/\s+/).filter(Boolean); return (p.length >= 2 ? p[0][0] + p[1][0] : (p[0] || "??").slice(0, 2)).toUpperCase(); };
+function nextRef(records, userId, ini) { const mine = records.filter((r) => r.userId === userId); const max = mine.reduce((m, r) => Math.max(m, parseInt((r.ref || "").replace(/\D/g, ""), 10) || 0), 0); return `${ini}-${String(max + 1).padStart(4, "0")}`; }
+function fmt(ts) { if (!ts)
+    return ""; return new Date(ts).toLocaleString("en-AU", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit", hour12: false }); }
+const clusterKey = (r) => `${(r.site || "").trim().toUpperCase()}::${normId(r.plantId)}`;
+const pinSheet = (r) => (r.pin && r.pin.sheet) || "main";
+function haversine(a, b) { if (!a || !b)
+    return null; const R = 6371000, t = Math.PI / 180; const dLat = (b.lat - a.lat) * t, dLng = (b.lng - a.lng) * t; const x = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dLng / 2) ** 2; return Math.round(R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x))); }
+function findClusters(records, dismissed) {
+    const active = records.filter((r) => r.reviewState !== "superseded" && (r.plantId || "").trim());
+    const groups = {};
+    active.forEach((r) => { const k = clusterKey(r); (groups[k] = groups[k] || []).push(r); });
+    const dmap = {};
+    (dismissed || []).forEach((d) => (dmap[d.key] = d.at));
+    const out = [];
+    Object.entries(groups).forEach(([key, recs]) => {
+        if (recs.length < 2)
+            return;
+        const dAt = dmap[key];
+        if (dAt && recs.every((r) => r.created <= dAt))
+            return;
+        const outcomes = new Set(recs.map((r) => r.status === "defect" ? `defect:${r.severity}:${r.category}` : r.status));
+        const users = new Set(recs.map((r) => r.userName));
+        const times = recs.map((r) => r.created);
+        const gpses = recs.map((r) => r.gps).filter(Boolean);
+        let dist = null;
+        if (gpses.length >= 2)
+            dist = Math.max(...gpses.slice(1).map((g) => haversine(gpses[0], g) || 0));
+        out.push({ key, recs: recs.sort((a, b) => a.created - b.created), type: outcomes.size > 1 ? "conflict" : "duplicate", users: [...users], spanMs: Math.max(...times) - Math.min(...times), dist });
+    });
+    return out.sort((a, b) => (a.type === b.type ? 0 : a.type === "conflict" ? -1 : 1));
+}
+/* ================================================================== */
+export default function App() {
+    const [projects, setProjects] = useState([]);
+    const [activeId, setActiveId] = useState("");
+    const [config, setConfig] = useState(DEFAULT_CONFIG);
+    const [records, setRecords] = useState([]);
+    const [plan, setPlan] = useState(null); // main / overview plan (e.g. the GA)
+    const [sheetImgs, setSheetImgs] = useState({}); // {sheetId: dataUrl}
+    const [user, setUser] = useState(null);
+    const [device, setDevice] = useState("");
+    const [view, setView] = useState("capture");
+    const [loaded, setLoaded] = useState(false);
+    const [detail, setDetail] = useState(null);
+    const [editing, setEditing] = useState(null);
+    const [hideIntro, setHideIntro] = useState(false);
+    const [online, setOnline] = useState(typeof navigator !== "undefined" ? navigator.onLine : true);
+    const [syncing, setSyncing] = useState(false);
+    const [lastSync, setLastSync] = useState(null);
+    const recordsRef = useRef(records);
+    recordsRef.current = records;
+    const activeRef = useRef(activeId);
+    activeRef.current = activeId;
+    const loadProject = useCallback(async (pid) => {
+        const cfg = await store.get(pKey(pid, "config"));
+        const c = cfg ? { ...DEFAULT_CONFIG, ...cfg } : DEFAULT_CONFIG;
+        setConfig(c);
+        const pl = await store.get(pKey(pid, "plan"));
+        setPlan(pl || null);
+        const imgs = {};
+        for (const s of c.sheets || []) {
+            const d = await store.get(pKey(pid, "sheet:" + s.id));
+            if (d)
+                imgs[s.id] = d;
+        }
+        setSheetImgs(imgs);
+        const keys = await store.keys(pKey(pid, "rec:"));
+        const recs = [];
+        for (const k of keys) {
+            const r = await store.get(k);
+            if (r)
+                recs.push(r);
+        }
+        recs.sort((a, b) => b.created - a.created);
+        setRecords(recs);
+    }, []);
+    useEffect(() => {
+        (async () => {
+            let projs = await store.get(G_PROJECTS) || [];
+            if (!projs.length) {
+                const id = rid() + rid();
+                projs = [{ id, name: "GUGAA 500kV", created: Date.now() }];
+                await store.set(G_PROJECTS, projs);
+                await store.set(G_ACTIVE, id);
+            }
+            setProjects(projs);
+            let active = await store.get(G_ACTIVE);
+            if (!active || !projs.find((p) => p.id === active))
+                active = projs[0].id;
+            setActiveId(active);
+            activeRef.current = active;
+            let dev = await store.get(DEVICE);
+            if (!dev) {
+                dev = rid() + rid();
+                await store.set(DEVICE, dev);
+            }
+            setDevice(dev);
+            const u = await store.get(USER);
+            if (u)
+                setUser(u);
+            await loadProject(active);
+            setLoaded(true);
+        })();
+    }, [loadProject]);
+    useEffect(() => {
+        const on = () => { setOnline(true); doSync(); };
+        const off = () => setOnline(false);
+        window.addEventListener("online", on);
+        window.addEventListener("offline", off);
+        return () => { window.removeEventListener("online", on); window.removeEventListener("offline", off); };
+    }, []); // eslint-disable-line
+    useEffect(() => { if (loaded && user)
+        doSync(); }, [loaded, user, activeId]); // eslint-disable-line
+    const persist = useCallback(async (rec) => { await store.set(pKey(activeRef.current, "rec:" + rec.id), rec); }, []);
+    const saveRecord = useCallback(async (rec, { fromSync } = {}) => {
+        setRecords((prev) => { const i = prev.findIndex((r) => r.id === rec.id); const next = i >= 0 ? prev.map((r) => (r.id === rec.id ? rec : r)) : [rec, ...prev]; return next.sort((a, b) => b.created - a.created); });
+        await persist(rec);
+        if (!fromSync)
+            doSync();
+    }, [persist]); // eslint-disable-line
+    const deleteRecord = useCallback(async (id) => { setRecords((prev) => prev.filter((r) => r.id !== id)); await store.del(pKey(activeRef.current, "rec:" + id)); if (syncAdapter.available && navigator.onLine)
+        await syncAdapter.remove(activeRef.current, id); }, []);
+    const saveConfig = useCallback(async (c) => { setConfig(c); await store.set(pKey(activeRef.current, "config"), c); }, []);
+    const savePlan = useCallback(async (p) => { setPlan(p); await store.set(pKey(activeRef.current, "plan"), p); }, []);
+    const placePlant = useCallback(async (key, pos) => { setConfig((c) => { const nc = { ...c, plants: (c.plants || []).map((p) => (p.key === key ? { ...p, sheet: pos.sheet, x: pos.x, y: pos.y } : p)) }; store.set(pKey(activeRef.current, "config"), nc); return nc; }); }, []);
+    /* plan sheets */
+    const addSheet = useCallback(async (name, dataUrl) => { const id = rid() + rid(); await store.set(pKey(activeRef.current, "sheet:" + id), dataUrl); setSheetImgs((m) => ({ ...m, [id]: dataUrl })); setConfig((c) => { const nc = { ...c, sheets: [...(c.sheets || []), { id, name }] }; store.set(pKey(activeRef.current, "config"), nc); return nc; }); }, []);
+    const importSheets = useCallback(async (arr) => { const added = []; const imgs = {}; for (const s of arr) {
+        const id = rid() + rid();
+        await store.set(pKey(activeRef.current, "sheet:" + id), s.dataUrl);
+        added.push({ id, name: s.name });
+        imgs[id] = s.dataUrl;
+    } setSheetImgs((m) => ({ ...m, ...imgs })); setConfig((c) => { const nc = { ...c, sheets: [...(c.sheets || []), ...added] }; store.set(pKey(activeRef.current, "config"), nc); return nc; }); }, []);
+    const deleteSheet = useCallback(async (id) => { await store.del(pKey(activeRef.current, "sheet:" + id)); setSheetImgs((m) => { const n = { ...m }; delete n[id]; return n; }); setConfig((c) => { const nc = { ...c, sheets: (c.sheets || []).filter((s) => s.id !== id) }; store.set(pKey(activeRef.current, "config"), nc); return nc; }); }, []);
+    const doSync = useCallback(async () => {
+        if (!syncAdapter.available || !navigator.onLine || syncing)
+            return;
+        const pid = activeRef.current;
+        setSyncing(true);
+        try {
+            const local = recordsRef.current;
+            for (const r of local.filter((x) => x.sync !== "synced")) {
+                await syncAdapter.push(pid, { ...r, sync: "synced" });
+            }
+            const remote = await syncAdapter.pull(pid);
+            const map = new Map();
+            [...local, ...remote].forEach((r) => { const ex = map.get(r.id); if (!ex || (r.updatedAt || 0) >= (ex.updatedAt || 0))
+                map.set(r.id, { ...r, sync: "synced" }); });
+            const merged = [...map.values()].sort((a, b) => b.created - a.created);
+            if (pid === activeRef.current) {
+                setRecords(merged);
+                for (const r of merged)
+                    await persist(r);
+                setLastSync(Date.now());
+            }
+        }
+        catch (e) { }
+        setSyncing(false);
+    }, [persist, syncing]);
+    const switchProject = useCallback(async (pid) => { setActiveId(pid); activeRef.current = pid; await store.set(G_ACTIVE, pid); await loadProject(pid); setView("capture"); }, [loadProject]);
+    const createProject = useCallback(async (name) => { const id = rid() + rid(); const np = [...projects, { id, name, created: Date.now() }]; setProjects(np); await store.set(G_PROJECTS, np); await switchProject(id); }, [projects, switchProject]);
+    const renameProject = useCallback(async (pid, name) => { const np = projects.map((p) => (p.id === pid ? { ...p, name } : p)); setProjects(np); await store.set(G_PROJECTS, np); }, [projects]);
+    const deleteProject = useCallback(async (pid) => { if (projects.length <= 1)
+        return; for (const k of await store.keys(pKey(pid, "")))
+        await store.del(k); const np = projects.filter((p) => p.id !== pid); setProjects(np); await store.set(G_PROJECTS, np); if (activeRef.current === pid)
+        await switchProject(np[0].id); }, [projects, switchProject]);
+    const pending = records.filter((r) => r.sync !== "synced").length;
+    const clusters = useMemo(() => findClusters(records, config.dismissed), [records, config.dismissed]);
+    const activeProject = projects.find((p) => p.id === activeId);
+    const getImg = useCallback((key) => (key === "main" ? plan?.dataUrl : sheetImgs[key]), [plan, sheetImgs]);
+    if (!loaded)
+        return React.createElement(Splash, { text: "Opening database\u2026" });
+    if (!user)
+        return React.createElement(SignIn, { onSignIn: async (name) => { const u = { userId: rid() + rid(), name, initials: initialsOf(name) }; setUser(u); await store.set(USER, u); } });
+    const NAV = [
+        { id: "capture", label: "Capture", Icon: Camera }, { id: "log", label: "Register", Icon: ClipboardList },
+        { id: "plan", label: "Plan", Icon: MapIcon }, { id: "review", label: "Review", Icon: GitMerge, badge: clusters.length },
+        { id: "stats", label: "Summary", Icon: BarChart3 },
+    ];
+    return (React.createElement("div", { className: "min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col" },
+        React.createElement("header", { className: "sticky top-0 z-20 bg-slate-900/95 backdrop-blur border-b border-slate-800" },
+            React.createElement("div", { className: "h-1 w-full", style: { background: "repeating-linear-gradient(45deg,#fbbf24,#fbbf24 12px,#0f172a 12px,#0f172a 24px)" } }),
+            React.createElement("div", { className: "max-w-3xl mx-auto px-4 py-2 flex items-center gap-2.5" },
+                React.createElement("div", { className: "h-8 w-8 rounded bg-amber-400 text-slate-950 flex items-center justify-center font-bold flex-shrink-0" }, "Q"),
+                React.createElement("button", { onClick: () => setView("projects"), className: "min-w-0 text-left leading-tight" },
+                    React.createElement("div", { className: "font-semibold tracking-tight text-sm truncate flex items-center gap-1" },
+                        activeProject?.name || "SiteQA",
+                        " ",
+                        React.createElement(Database, { size: 12, className: "text-slate-500" })),
+                    React.createElement("div", { className: "text-[10px] text-slate-400 font-mono uppercase tracking-wider" }, "tap to switch database")),
+                React.createElement("div", { className: "ml-auto flex items-center gap-1.5 flex-shrink-0" },
+                    React.createElement("button", { onClick: doSync, title: "Sync now", className: `flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs ${!syncAdapter.available ? "border-slate-700 text-slate-500" : online ? "border-emerald-500/40 text-emerald-300 bg-emerald-500/10" : "border-amber-500/40 text-amber-300 bg-amber-500/10"}` },
+                        syncing ? React.createElement(RefreshCw, { size: 13, className: "animate-spin" }) : online && syncAdapter.available ? React.createElement(Cloud, { size: 13 }) : React.createElement(CloudOff, { size: 13 }),
+                        pending > 0 ? pending : online ? React.createElement(Check, { size: 13 }) : "off"),
+                    React.createElement("button", { onClick: () => setView("user"), className: "h-7 w-7 rounded-full bg-slate-700 text-xs font-semibold flex items-center justify-center", title: user.name }, user.initials),
+                    React.createElement("button", { onClick: () => setView("setup"), className: "text-slate-400 hover:text-amber-400 p-1" },
+                        React.createElement(Settings, { size: 18 }))))),
+        React.createElement("main", { className: "flex-1 max-w-3xl w-full mx-auto px-4 pb-28 pt-4" },
+            view === "capture" && !hideIntro && (config.plants || []).length === 0 && records.length === 0 && React.createElement(FirstRun, { project: activeProject, onSetup: () => setView("setup"), onHide: () => setHideIntro(true) }),
+            view === "capture" && React.createElement(CaptureForm, { config: config, records: records, hasPlan: !!plan, mainImg: plan?.dataUrl, user: user, device: device, onSave: async (r) => { await saveRecord(r); setView("log"); } }),
+            view === "log" && React.createElement(Register, { records: records, user: user, config: config, onOpen: setDetail }),
+            view === "plan" && React.createElement(PlanView, { plan: plan, config: config, sheetImgs: sheetImgs, records: records, plants: config.plants, onOpen: setDetail, onPlan: savePlan, onPlace: placePlant }),
+            view === "review" && React.createElement(Review, { clusters: clusters, onOpen: setDetail, onSupersede: async (r) => { await saveRecord({ ...r, reviewState: "superseded", updatedAt: Date.now(), sync: "pending" }); }, onRestore: async (r) => { await saveRecord({ ...r, reviewState: "active", updatedAt: Date.now(), sync: "pending" }); }, onDismiss: (key) => saveConfig({ ...config, dismissed: [...(config.dismissed || []).filter((d) => d.key !== key), { key, at: Date.now() }] }) }),
+            view === "stats" && React.createElement(Summary, { records: records, config: config }),
+            view === "user" && React.createElement(UserPanel, { user: user, device: device, records: records, online: online, onSignOut: async () => { await store.del(USER); setUser(null); }, onRename: async (name) => { const u = { ...user, name, initials: initialsOf(name) }; setUser(u); await store.set(USER, u); setView("capture"); } }),
+            view === "projects" && React.createElement(ProjectPanel, { projects: projects, activeId: activeId, onSwitch: switchProject, onCreate: createProject, onRename: renameProject, onDelete: deleteProject, onClose: () => setView("capture") }),
+            view === "setup" && React.createElement(Setup, { config: config, onConfig: saveConfig, records: records, plan: plan, onPlan: savePlan, sheetImgs: sheetImgs, onAddSheet: addSheet, onImportSheets: importSheets, onDeleteSheet: deleteSheet, lastSync: lastSync, project: activeProject, onImport: async (recs, cfg) => { if (cfg)
+                    await saveConfig({ ...DEFAULT_CONFIG, ...cfg }); for (const r of recs)
+                    await saveRecord(r, { fromSync: true }); doSync(); } })),
+        React.createElement("nav", { className: "fixed bottom-0 inset-x-0 z-20 bg-slate-900/95 backdrop-blur border-t border-slate-800" },
+            React.createElement("div", { className: "max-w-3xl mx-auto grid grid-cols-5" }, NAV.map(({ id, label, Icon, badge }) => (React.createElement("button", { key: id, onClick: () => setView(id), className: `relative flex flex-col items-center gap-1 py-2.5 text-[11px] ${view === id ? "text-amber-400" : "text-slate-400 hover:text-slate-200"}` },
+                React.createElement(Icon, { size: 20, strokeWidth: view === id ? 2.4 : 1.8 }),
+                label,
+                badge > 0 && React.createElement("span", { className: "absolute top-1 right-5 min-w-4 h-4 px-1 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center" }, badge)))))),
+        detail && React.createElement(DetailSheet, { record: detail, getImg: getImg, user: user, onClose: () => setDetail(null), onEdit: (r) => { setEditing(r); setDetail(null); }, onSave: saveRecord, onDelete: async (id) => { await deleteRecord(id); setDetail(null); } }),
+        editing && React.createElement(EditModal, { record: editing, config: config, onClose: () => setEditing(null), onSave: async (r) => { await saveRecord({ ...r, updatedAt: Date.now(), sync: "pending" }); setEditing(null); } })));
+}
+/* ================= shared ================= */
+function Splash({ text }) { return React.createElement("div", { className: "min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 font-sans" }, text); }
+function Field({ label, children, hint }) { return React.createElement("label", { className: "block" },
+    React.createElement("span", { className: "text-xs font-medium text-slate-400 uppercase tracking-wide" }, label),
+    React.createElement("div", { className: "mt-1" }, children),
+    hint && React.createElement("span", { className: "text-[11px] text-slate-500 mt-1 block" }, hint)); }
+const inputCls = "w-full rounded-lg bg-slate-800 border border-slate-700 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 outline-none";
+function Segmented({ options, value, onChange }) {
+    return React.createElement("div", { className: "grid gap-1.5", style: { gridTemplateColumns: `repeat(${options.length},minmax(0,1fr))` } }, options.map((o) => { const a = value === o.value; return React.createElement("button", { key: o.value, type: "button", onClick: () => onChange(o.value), className: `rounded-lg border px-2 py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 ${a ? "border-transparent text-slate-950" : "bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500"}`, style: a ? { background: o.color } : undefined },
+        o.Icon && React.createElement(o.Icon, { size: 16 }),
+        " ",
+        o.label); }));
+}
+function StatusChip({ status, severity }) {
+    if (status === "defect" && severity) {
+        const sv = SEVERITIES[severity];
+        return React.createElement("span", { className: `inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border ${sv.chip}` },
+            React.createElement(AlertTriangle, { size: 12 }),
+            " ",
+            severity);
+    }
+    const s = STATUSES[status];
+    return React.createElement("span", { className: `inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border ${s.chip}` },
+        React.createElement(s.Icon, { size: 12 }),
+        " ",
+        s.label);
+}
+function Empty({ Icon, title, text }) { return React.createElement("div", { className: "text-center py-16 text-slate-400" },
+    React.createElement(Icon, { size: 32, className: "mx-auto mb-3 text-slate-600" }),
+    React.createElement("div", { className: "font-medium text-slate-300" }, title),
+    React.createElement("div", { className: "text-sm mt-1 max-w-xs mx-auto" }, text)); }
+function FirstRun({ project, onSetup, onHide }) {
+    return (React.createElement("div", { className: "mb-4 rounded-xl border border-amber-400/40 bg-amber-400/10 p-4" },
+        React.createElement("div", { className: "flex items-start gap-2.5" },
+            React.createElement(Database, { size: 18, className: "text-amber-400 mt-0.5 flex-shrink-0" }),
+            React.createElement("div", { className: "min-w-0 flex-1" },
+                React.createElement("div", { className: "font-semibold text-amber-200" },
+                    "First time on \u201C",
+                    project?.name || "this database",
+                    "\u201D? Load the site data."),
+                React.createElement("ol", { className: "mt-2 space-y-1 text-sm text-amber-100/90 list-decimal list-inside" },
+                    React.createElement("li", null,
+                        "Tap ",
+                        React.createElement("span", { className: "font-medium" }, "\u2699 Setup \u2192 Restore"),
+                        " and choose this site\u2019s ",
+                        React.createElement("span", { className: "font-mono text-xs" }, "\u2026_register_seed.json"),
+                        "."),
+                    React.createElement("li", null,
+                        "Then ",
+                        React.createElement("span", { className: "font-medium" }, "Setup \u2192 Import per-bay sheets bundle"),
+                        " and choose its ",
+                        React.createElement("span", { className: "font-mono text-xs" }, "\u2026_sheets.json"),
+                        "."),
+                    React.createElement("li", null,
+                        "Use ",
+                        React.createElement("span", { className: "font-medium" }, "the database name up top \u2192 New database"),
+                        " to add the other sites, then repeat.")),
+                React.createElement("div", { className: "flex gap-2 mt-3" },
+                    React.createElement("button", { onClick: onSetup, className: "rounded-lg bg-amber-400 text-slate-950 font-semibold px-3 py-2 text-sm" }, "Open Setup"),
+                    React.createElement("button", { onClick: onHide, className: "rounded-lg border border-amber-400/40 text-amber-200 px-3 py-2 text-sm" }, "Dismiss"))))));
+}
+/* ================= SIGN IN ================= */
+function SignIn({ onSignIn }) {
+    const [name, setName] = useState("");
+    return (React.createElement("div", { className: "min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col items-center justify-center px-6" },
+        React.createElement("div", { className: "h-1 w-40 mb-8", style: { background: "repeating-linear-gradient(45deg,#fbbf24,#fbbf24 12px,#0f172a 12px,#0f172a 24px)" } }),
+        React.createElement("div", { className: "h-12 w-12 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xl mb-4" }, "Q"),
+        React.createElement("h1", { className: "text-xl font-semibold" }, "SiteQA"),
+        React.createElement("p", { className: "text-sm text-slate-400 mt-1 mb-6 text-center max-w-xs" }, "Enter your name to start logging. Records are stamped to you and merged into the crew register."),
+        React.createElement("input", { className: inputCls + " max-w-xs text-center", value: name, autoFocus: true, placeholder: "e.g. Jack Anderson", onChange: (e) => setName(e.target.value), onKeyDown: (e) => e.key === "Enter" && name.trim() && onSignIn(name.trim()) }),
+        React.createElement("button", { disabled: !name.trim(), onClick: () => onSignIn(name.trim()), className: "mt-4 w-full max-w-xs rounded-lg bg-amber-400 text-slate-950 font-semibold py-3 disabled:opacity-40" }, "Start logging")));
+}
+/* ================= PROJECTS ================= */
+function ProjectPanel({ projects, activeId, onSwitch, onCreate, onRename, onDelete, onClose }) {
+    const [name, setName] = useState("");
+    const [renaming, setRenaming] = useState(null);
+    const [rname, setRname] = useState("");
+    return (React.createElement("div", { className: "space-y-5" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(Database, { size: 18, className: "text-amber-400" }),
+            " Databases"),
+        React.createElement("p", { className: "text-[11px] text-slate-400 -mt-2" }, "Each site is its own isolated register \u2014 records, plant register, plan sheets and sync. Switching changes which database you log into."),
+        React.createElement("div", { className: "space-y-2" }, projects.map((p) => (React.createElement("div", { key: p.id, className: `rounded-xl border p-3 ${p.id === activeId ? "border-amber-400/60 bg-amber-400/5" : "border-slate-800 bg-slate-900"}` }, renaming === p.id ? (React.createElement("div", { className: "flex gap-2" },
+            React.createElement("input", { className: inputCls, value: rname, autoFocus: true, onChange: (e) => setRname(e.target.value) }),
+            React.createElement("button", { onClick: () => { if (rname.trim())
+                    onRename(p.id, rname.trim()); setRenaming(null); }, className: "rounded-lg bg-amber-400 text-slate-950 px-3 text-sm font-semibold" }, "Save"))) : (React.createElement("div", { className: "flex items-center gap-2" },
+            React.createElement("button", { onClick: () => onSwitch(p.id), className: "flex items-center gap-2 min-w-0 flex-1 text-left" },
+                React.createElement(Building2, { size: 16, className: p.id === activeId ? "text-amber-400" : "text-slate-500" }),
+                React.createElement("span", { className: "font-medium truncate" }, p.name),
+                p.id === activeId && React.createElement("span", { className: "text-[10px] text-amber-300 border border-amber-400/40 rounded-full px-1.5" }, "active")),
+            React.createElement("button", { onClick: () => { setRenaming(p.id); setRname(p.name); }, className: "p-1.5 text-slate-400 hover:text-amber-400" },
+                React.createElement(Pencil, { size: 14 })),
+            projects.length > 1 && React.createElement("button", { onClick: () => { if (confirm(`Delete database "${p.name}" and all its records on this device?`))
+                    onDelete(p.id); }, className: "p-1.5 text-slate-400 hover:text-red-400" },
+                React.createElement(Trash2, { size: 14 })))))))),
+        React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-3 space-y-2" },
+            React.createElement("div", { className: "text-sm font-medium" }, "New database"),
+            React.createElement("div", { className: "flex gap-2" },
+                React.createElement("input", { className: inputCls, value: name, onChange: (e) => setName(e.target.value), placeholder: "e.g. Wagga 330kV Augmentation", onKeyDown: (e) => { if (e.key === "Enter" && name.trim()) {
+                        onCreate(name.trim());
+                        setName("");
+                    } } }),
+                React.createElement("button", { onClick: () => { if (name.trim()) {
+                        onCreate(name.trim());
+                        setName("");
+                    } }, className: "rounded-lg bg-amber-400 text-slate-950 px-3 font-semibold flex items-center gap-1" },
+                    React.createElement(Plus, { size: 16 })))),
+        React.createElement("button", { onClick: onClose, className: "w-full rounded-lg border border-slate-700 bg-slate-800 py-2.5 text-sm" }, "Done")));
+}
+/* ================= CAPTURE ================= */
+function CaptureForm({ config, records, hasPlan, mainImg, user, device, onSave }) {
+    const plants = config.plants || [];
+    const blank = { photos: [], site: config.sites[0] || "", area: config.areas[0] || "", plantId: "", equipment: config.equipment[0] || "", element: config.elements[0] || "", owner: config.owners[0] || "", status: "conforming", severity: "Minor", category: config.categories[0] || "", description: "", drawingRef: "", itpRef: "", ncr: "", gps: null, pin: null };
+    const [f, setF] = useState(blank);
+    const [busy, setBusy] = useState(false);
+    const [pinMode, setPinMode] = useState(false);
+    const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
+    const plantMatch = useMemo(() => plants.find((p) => p.key === normId(f.plantId)), [plants, f.plantId]);
+    const onPlant = (val) => { const m = plants.find((p) => p.key === normId(val)); setF((p) => m ? { ...p, plantId: val, equipment: m.equipment || p.equipment, area: m.area || p.area, owner: m.owner || p.owner, pin: (m.x != null ? { sheet: m.sheet || "main", x: m.x, y: m.y } : p.pin) } : { ...p, plantId: val }); };
+    const addPhotos = async (files) => { setBusy(true); const arr = []; for (const file of files) {
+        try {
+            arr.push({ id: rid(), dataUrl: await compressImage(file) });
+        }
+        catch { }
+    } setF((p) => ({ ...p, photos: [...p.photos, ...arr] })); setBusy(false); };
+    const grabGps = () => { if (!navigator.geolocation)
+        return; navigator.geolocation.getCurrentPosition((pos) => set("gps", { lat: +pos.coords.latitude.toFixed(6), lng: +pos.coords.longitude.toFixed(6), acc: Math.round(pos.coords.accuracy) }), () => alert("Couldn't read GPS — check location permission."), { enableHighAccuracy: true, timeout: 8000 }); };
+    const possibleDup = useMemo(() => { const lv = f.plantId.trim(); if (!lv)
+        return null; const k = `${f.site.trim().toUpperCase()}::${normId(lv)}`; const hit = records.filter((r) => r.reviewState !== "superseded" && clusterKey(r) === k); return hit.length ? hit : null; }, [f.plantId, f.site, records]);
+    const submit = () => {
+        if (!f.plantId.trim()) {
+            alert("Add a plant identifier before saving.");
+            return;
+        }
+        const now = Date.now();
+        onSave({ ...f, id: device.slice(0, 4) + "-" + now.toString(36) + "-" + rid(), ref: nextRef(records, user.userId, user.initials), created: now, updatedAt: now, sync: "pending", reviewState: "active", userId: user.userId, userName: user.name, device, rectification: f.status === "defect" ? { state: "open", closedDate: null, closedBy: "", closeoutNotes: "", closeoutPhotos: [] } : null });
+        setF(blank);
+        setPinMode(false);
+    };
+    return (React.createElement("div", { className: "space-y-5" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(Camera, { size: 18, className: "text-amber-400" }),
+            " New inspection"),
+        React.createElement("div", { className: "grid grid-cols-4 gap-2" },
+            f.photos.map((p) => (React.createElement("div", { key: p.id, className: "relative aspect-square rounded-lg overflow-hidden border border-slate-700" },
+                React.createElement("img", { src: p.dataUrl, alt: "", className: "w-full h-full object-cover" }),
+                React.createElement("button", { onClick: () => set("photos", f.photos.filter((x) => x.id !== p.id)), className: "absolute top-1 right-1 bg-slate-950/80 rounded-full p-0.5" },
+                    React.createElement(X, { size: 14 }))))),
+            React.createElement("label", { className: "aspect-square rounded-lg border border-dashed border-slate-600 flex flex-col items-center justify-center text-slate-400 cursor-pointer hover:border-amber-400 hover:text-amber-400" },
+                busy ? React.createElement("span", { className: "text-xs" }, "\u2026") : React.createElement(React.Fragment, null,
+                    React.createElement(Plus, { size: 22 }),
+                    React.createElement("span", { className: "text-[10px] mt-1" }, "Add photo")),
+                React.createElement("input", { type: "file", accept: "image/*", capture: "environment", multiple: true, className: "hidden", onChange: (e) => { addPhotos([...e.target.files]); e.target.value = ""; } }))),
+        React.createElement(Field, { label: "Outcome" },
+            React.createElement(Segmented, { value: f.status, onChange: (v) => set("status", v), options: [{ value: "conforming", label: "Conforming", color: STATUSES.conforming.color, Icon: CheckCircle2 }, { value: "observation", label: "Observation", color: STATUSES.observation.color, Icon: Eye }, { value: "defect", label: "Defect", color: STATUSES.defect.color, Icon: AlertTriangle }] })),
+        React.createElement("div", { className: "grid sm:grid-cols-2 gap-4" },
+            React.createElement(Field, { label: "Work element", hint: "Which part of the works" },
+                React.createElement("select", { className: inputCls, value: f.element, onChange: (e) => set("element", e.target.value) }, config.elements.map((x) => React.createElement("option", { key: x }, x)))),
+            React.createElement(Field, { label: "Owner / responsible", hint: "Who installs & rectifies" },
+                React.createElement("select", { className: inputCls, value: f.owner, onChange: (e) => set("owner", e.target.value) }, config.owners.map((x) => React.createElement("option", { key: x }, x))))),
+        f.status === "defect" && (React.createElement("div", { className: "space-y-4 rounded-xl border border-red-500/30 bg-red-500/5 p-3" },
+            React.createElement(Field, { label: "Severity" },
+                React.createElement(Segmented, { value: f.severity, onChange: (v) => set("severity", v), options: Object.keys(SEVERITIES).map((k) => ({ value: k, label: k, color: SEVERITIES[k].color })) })),
+            React.createElement(Field, { label: "Defect category (nature)" },
+                React.createElement("select", { className: inputCls, value: f.category, onChange: (e) => set("category", e.target.value) }, config.categories.map((c) => React.createElement("option", { key: c }, c)))))),
+        React.createElement("div", { className: "grid sm:grid-cols-2 gap-4" },
+            React.createElement(Field, { label: "Site" },
+                React.createElement("select", { className: inputCls, value: f.site, onChange: (e) => set("site", e.target.value) }, config.sites.map((s) => React.createElement("option", { key: s }, s)))),
+            React.createElement(Field, { label: "Area / zone" },
+                React.createElement("input", { className: inputCls, list: "areas", value: f.area, onChange: (e) => set("area", e.target.value), placeholder: "e.g. Diameter A" }),
+                React.createElement("datalist", { id: "areas" }, config.areas.map((a) => React.createElement("option", { key: a, value: a })))),
+            React.createElement(Field, { label: "Plant identifier", hint: plants.length ? "Pick from the plant register or type a new one" : "Designation as marked on plant" },
+                React.createElement("input", { className: inputCls + " font-mono", list: "plantids", value: f.plantId, onChange: (e) => onPlant(e.target.value), placeholder: "aAB" }),
+                React.createElement("datalist", { id: "plantids" }, plants.map((p) => React.createElement("option", { key: p.key, value: p.plantId }, p.equipment)))),
+            React.createElement(Field, { label: "Equipment type" },
+                React.createElement("select", { className: inputCls, value: f.equipment, onChange: (e) => set("equipment", e.target.value) }, config.equipment.map((eq) => React.createElement("option", { key: eq }, eq))))),
+        plantMatch && (React.createElement("div", { className: "rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-2.5 text-xs text-emerald-300 flex items-center gap-2" },
+            React.createElement(ListChecks, { size: 14 }),
+            " Matched ",
+            React.createElement("span", { className: "font-mono" }, plantMatch.plantId),
+            plantMatch.owner ? ` · ${plantMatch.owner}` : "",
+            plantMatch.x != null ? " · pin set from sheet" : "",
+            ".")),
+        possibleDup && (React.createElement("div", { className: "rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm" },
+            React.createElement("div", { className: "flex items-center gap-2 text-amber-300 font-medium" },
+                React.createElement(AlertTriangle, { size: 14 }),
+                " Already logged against this plant"),
+            React.createElement("div", { className: "text-amber-200/80 text-xs mt-1" },
+                possibleDup.length,
+                " record",
+                possibleDup.length > 1 ? "s" : "",
+                " on ",
+                f.plantId,
+                " \u2014 ",
+                [...new Set(possibleDup.map((r) => r.userName))].join(", "),
+                ". Save and it'll be flagged for review."))),
+        React.createElement(Field, { label: "Description / notes" },
+            React.createElement("textarea", { className: inputCls + " min-h-20 resize-y", value: f.description, onChange: (e) => set("description", e.target.value), placeholder: "What was observed, against which acceptance criterion\u2026" })),
+        React.createElement("div", { className: "grid sm:grid-cols-3 gap-4" },
+            React.createElement(Field, { label: "Drawing ref" },
+                React.createElement("input", { className: inputCls + " font-mono", value: f.drawingRef, onChange: (e) => set("drawingRef", e.target.value), placeholder: "GGA-100221" })),
+            React.createElement(Field, { label: "ITP / lot ref" },
+                React.createElement("input", { className: inputCls + " font-mono", value: f.itpRef, onChange: (e) => set("itpRef", e.target.value), placeholder: "ITP-04 / Lot 12" })),
+            React.createElement(Field, { label: "NCR no." },
+                React.createElement("input", { className: inputCls + " font-mono", value: f.ncr, onChange: (e) => set("ncr", e.target.value), placeholder: "optional" }))),
+        React.createElement("div", { className: "grid sm:grid-cols-2 gap-3" },
+            React.createElement("button", { type: "button", onClick: grabGps, className: "flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm hover:border-amber-400" },
+                React.createElement(Crosshair, { size: 16 }),
+                " ",
+                f.gps ? `${f.gps.lat}, ${f.gps.lng} (±${f.gps.acc}m)` : "Capture GPS"),
+            React.createElement("button", { type: "button", disabled: !hasPlan, onClick: () => setPinMode((v) => !v), className: `flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm ${!hasPlan ? "border-slate-800 text-slate-600 cursor-not-allowed" : pinMode ? "border-amber-400 text-amber-400" : "border-slate-700 bg-slate-800 hover:border-amber-400"}` },
+                React.createElement(MapPin, { size: 16 }),
+                " ",
+                f.pin ? "Pin set — tap to move" : hasPlan ? "Pin on overview plan" : "No plan")),
+        pinMode && mainImg && React.createElement(PlanPicker, { img: mainImg, pin: f.pin, onPin: (p) => set("pin", { sheet: "main", x: p.x, y: p.y }) }),
+        React.createElement("button", { onClick: submit, className: "w-full rounded-lg bg-amber-400 text-slate-950 font-semibold py-3 hover:bg-amber-300" }, "Save record"),
+        React.createElement("p", { className: "text-[11px] text-slate-500 text-center" }, "Pick a registered plant ID and its pin (and sheet) come across automatically.")));
+}
+function ZoomPan({ src, alt, placing, onTap, children }) {
+    const wrap = useRef(null), inner = useRef(null);
+    const st = useRef({ s: 1, tx: 0, ty: 0 }), g = useRef(null), lastTouch = useRef(0);
+    const placingRef = useRef(placing);
+    placingRef.current = placing;
+    const onTapRef = useRef(onTap);
+    onTapRef.current = onTap;
+    const [ratio, setRatio] = useState(null), [zoomed, setZoomed] = useState(false);
+    useEffect(() => {
+        const el = wrap.current;
+        if (!el)
+            return;
+        const apply = () => { if (inner.current)
+            inner.current.style.transform = `translate(${st.current.tx}px,${st.current.ty}px) scale(${st.current.s})`; setZoomed(st.current.s > 1.01); };
+        const cs = (s) => Math.min(6, Math.max(1, s));
+        const clampT = () => { const w = el.clientWidth, h = el.clientHeight, s = st.current.s; st.current.tx = Math.min(0, Math.max(w - w * s, st.current.tx)); st.current.ty = Math.min(0, Math.max(h - h * s, st.current.ty)); };
+        const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+        const start = (e) => { const r = el.getBoundingClientRect(); if (e.touches.length === 2) {
+            const [a, b] = e.touches;
+            g.current = { mode: "pinch", d0: dist(a, b), mx: (a.clientX + b.clientX) / 2 - r.left, my: (a.clientY + b.clientY) / 2 - r.top, s0: st.current.s, tx0: st.current.tx, ty0: st.current.ty };
+        }
+        else if (e.touches.length === 1) {
+            const t = e.touches[0];
+            g.current = { mode: "pan", sx: t.clientX, sy: t.clientY, tx0: st.current.tx, ty0: st.current.ty, moved: false };
+        } };
+        const move = (e) => { if (!g.current)
+            return; if (g.current.mode === "pinch" && e.touches.length === 2) {
+            e.preventDefault();
+            const [a, b] = e.touches;
+            const s = cs(g.current.s0 * dist(a, b) / (g.current.d0 || 1));
+            st.current.s = s;
+            st.current.tx = g.current.mx - (g.current.mx - g.current.tx0) * (s / g.current.s0);
+            st.current.ty = g.current.my - (g.current.my - g.current.ty0) * (s / g.current.s0);
+            clampT();
+            apply();
+        }
+        else if (g.current.mode === "pan" && e.touches.length === 1) {
+            if (st.current.s <= 1.01 && !placingRef.current)
+                return;
+            e.preventDefault();
+            const t = e.touches[0];
+            const dx = t.clientX - g.current.sx, dy = t.clientY - g.current.sy;
+            if (Math.abs(dx) > 6 || Math.abs(dy) > 6)
+                g.current.moved = true;
+            if (st.current.s > 1.01) {
+                st.current.tx = g.current.tx0 + dx;
+                st.current.ty = g.current.ty0 + dy;
+                clampT();
+                apply();
+            }
+        } };
+        const end = (e) => { if (!g.current)
+            return; lastTouch.current = Date.now(); if (e.touches.length === 0) {
+            if (g.current.mode === "pan" && !g.current.moved && placingRef.current && onTapRef.current) {
+                const r = el.getBoundingClientRect(), t = e.changedTouches[0], px = t.clientX - r.left, py = t.clientY - r.top;
+                onTapRef.current(+Math.min(1, Math.max(0, ((px - st.current.tx) / st.current.s) / r.width)).toFixed(4), +Math.min(1, Math.max(0, ((py - st.current.ty) / st.current.s) / r.height)).toFixed(4));
+            }
+            else if (g.current.moved)
+                e.preventDefault();
+            g.current = null;
+        }
+        else {
+            const t = e.touches[0];
+            g.current = { mode: "pan", sx: t.clientX, sy: t.clientY, tx0: st.current.tx, ty0: st.current.ty, moved: true };
+        } };
+        el.addEventListener("touchstart", start, { passive: false });
+        el.addEventListener("touchmove", move, { passive: false });
+        el.addEventListener("touchend", end, { passive: false });
+        el.__reset = () => { st.current = { s: 1, tx: 0, ty: 0 }; apply(); };
+        return () => { el.removeEventListener("touchstart", start); el.removeEventListener("touchmove", move); el.removeEventListener("touchend", end); };
+    }, []);
+    const reset = () => wrap.current && wrap.current.__reset && wrap.current.__reset();
+    const onWheel = (e) => { e.preventDefault(); const el = wrap.current, r = el.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, ns = Math.min(6, Math.max(1, st.current.s * (e.deltaY < 0 ? 1.15 : 1 / 1.15))); st.current.tx = mx - (mx - st.current.tx) * (ns / st.current.s); st.current.ty = my - (my - st.current.ty) * (ns / st.current.s); st.current.s = ns; const w = el.clientWidth, h = el.clientHeight; st.current.tx = Math.min(0, Math.max(w - w * ns, st.current.tx)); st.current.ty = Math.min(0, Math.max(h - h * ns, st.current.ty)); if (inner.current)
+        inner.current.style.transform = `translate(${st.current.tx}px,${st.current.ty}px) scale(${ns})`; setZoomed(ns > 1.01); };
+    const onClick = (e) => { if (!placing || !onTap || Date.now() - lastTouch.current < 700)
+        return; const el = wrap.current, r = el.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top; onTap(+Math.min(1, Math.max(0, ((px - st.current.tx) / st.current.s) / r.width)).toFixed(4), +Math.min(1, Math.max(0, ((py - st.current.ty) / st.current.s) / r.height)).toFixed(4)); };
+    return (React.createElement("div", { className: "relative" },
+        React.createElement("div", { ref: wrap, onWheel: onWheel, onClick: onClick, style: { aspectRatio: ratio || undefined, minHeight: ratio ? undefined : 220, touchAction: "none" }, className: `relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950 ${placing ? "cursor-crosshair" : ""}` },
+            React.createElement("div", { ref: inner, className: "absolute inset-0 origin-top-left will-change-transform" },
+                React.createElement("img", { src: src, alt: alt, draggable: false, onLoad: (e) => { const im = e.target; if (im.naturalWidth)
+                        setRatio(im.naturalWidth + " / " + im.naturalHeight); }, className: "w-full h-full select-none pointer-events-none" }),
+                children)),
+        zoomed && React.createElement("button", { onClick: reset, className: "absolute right-2 bottom-2 text-[11px] bg-slate-900/90 border border-slate-600 rounded-lg px-2 py-1 text-slate-200" }, "Reset zoom"),
+        placing && React.createElement("div", { className: "absolute left-2 top-2 text-[11px] bg-slate-900/85 border border-amber-400/40 text-amber-200 rounded-lg px-2 py-1 pointer-events-none" }, "Pinch to zoom \u00B7 drag to pan \u00B7 tap to drop")));
+}
+function PlanPicker({ img, pin, onPin }) {
+    return (React.createElement(ZoomPan, { src: img, alt: "plan", placing: true, onTap: (x, y) => onPin({ x, y }) }, pin && React.createElement("div", { className: "absolute -translate-x-1/2 -translate-y-full", style: { left: pin.x * 100 + "%", top: pin.y * 100 + "%" } },
+        React.createElement(MapPin, { size: 28, className: "text-amber-400", fill: "#fbbf24" }))));
+}
+/* ================= REGISTER ================= */
+function Register({ records, user, config, onOpen }) {
+    const [q, setQ] = useState("");
+    const [filt, setFilt] = useState("all");
+    const [el, setEl] = useState("all");
+    const [own, setOwn] = useState("all");
+    const [showSup, setShowSup] = useState(false);
+    const list = useMemo(() => {
+        let r = records.filter((x) => showSup ? true : x.reviewState !== "superseded");
+        if (filt === "open")
+            r = r.filter((x) => x.status === "defect" && x.rectification?.state !== "closed");
+        else if (filt === "mine")
+            r = r.filter((x) => x.userId === user.userId);
+        else if (filt !== "all")
+            r = r.filter((x) => x.status === filt);
+        if (el !== "all")
+            r = r.filter((x) => x.element === el);
+        if (own !== "all")
+            r = r.filter((x) => x.owner === own);
+        if (q.trim()) {
+            const s = q.toLowerCase();
+            r = r.filter((x) => [x.ref, x.plantId, x.equipment, x.area, x.site, x.description, x.drawingRef, x.itpRef, x.userName, x.element, x.owner].filter(Boolean).some((v) => v.toLowerCase().includes(s)));
+        }
+        return r;
+    }, [records, q, filt, el, own, showSup, user.userId]);
+    const chips = [{ id: "all", label: "All" }, { id: "mine", label: "Mine" }, { id: "defect", label: "Defects" }, { id: "open", label: "Open" }, { id: "observation", label: "Obs" }, { id: "conforming", label: "Conf" }];
+    return (React.createElement("div", { className: "space-y-3" },
+        React.createElement("div", { className: "relative" },
+            React.createElement(Search, { size: 16, className: "absolute left-3 top-3 text-slate-500" }),
+            React.createElement("input", { className: inputCls + " pl-9", value: q, onChange: (e) => setQ(e.target.value), placeholder: "Search plant ID, drawing, inspector, element\u2026" })),
+        React.createElement("div", { className: "flex gap-2 overflow-x-auto pb-1" }, chips.map((c) => React.createElement("button", { key: c.id, onClick: () => setFilt(c.id), className: `whitespace-nowrap text-xs px-3 py-1.5 rounded-full border ${filt === c.id ? "bg-amber-400 text-slate-950 border-amber-400" : "border-slate-700 text-slate-300"}` }, c.label))),
+        React.createElement("div", { className: "grid grid-cols-2 gap-2" },
+            React.createElement("select", { className: inputCls + " py-2", value: el, onChange: (e) => setEl(e.target.value) },
+                React.createElement("option", { value: "all" }, "All elements"),
+                config.elements.map((x) => React.createElement("option", { key: x }, x))),
+            React.createElement("select", { className: inputCls + " py-2", value: own, onChange: (e) => setOwn(e.target.value) },
+                React.createElement("option", { value: "all" }, "All owners"),
+                config.owners.map((x) => React.createElement("option", { key: x }, x)))),
+        list.length === 0 ? React.createElement(Empty, { Icon: ClipboardList, title: "No records here", text: records.length ? "Nothing matches that filter." : "Capture your first photo to start this database's register." }) : (React.createElement("div", { className: "space-y-2" },
+            list.map((r) => {
+                const sup = r.reviewState === "superseded";
+                return (React.createElement("button", { key: r.id, onClick: () => onOpen(r), className: `w-full text-left flex gap-3 items-center rounded-xl border bg-slate-900 p-2.5 hover:border-slate-600 ${sup ? "border-slate-800 opacity-50" : "border-slate-800"}` },
+                    React.createElement("div", { className: "h-14 w-14 rounded-lg bg-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center" }, r.photos[0] ? React.createElement("img", { src: r.photos[0].dataUrl, alt: "", className: "w-full h-full object-cover" }) : React.createElement(ImageIcon, { size: 18, className: "text-slate-600" })),
+                    React.createElement("div", { className: "min-w-0 flex-1" },
+                        React.createElement("div", { className: "flex items-center gap-2 flex-wrap" },
+                            React.createElement("span", { className: "font-mono text-xs text-slate-400" }, r.ref),
+                            React.createElement(StatusChip, { status: r.status, severity: r.severity }),
+                            r.owner === "OEM" && React.createElement("span", { className: "text-[10px] text-purple-300 border border-purple-500/40 rounded-full px-1.5" }, "OEM"),
+                            sup && React.createElement("span", { className: "text-[10px] text-slate-400 border border-slate-600 rounded-full px-1.5" }, "superseded"),
+                            r.status === "defect" && r.rectification?.state === "closed" && React.createElement("span", { className: "text-[10px] text-emerald-400 inline-flex items-center gap-0.5" },
+                                React.createElement(CheckCircle2, { size: 11 }),
+                                " closed"),
+                            r.sync !== "synced" && React.createElement(CloudOff, { size: 10, className: "text-amber-400" })),
+                        React.createElement("div", { className: "font-medium font-mono truncate" }, r.plantId),
+                        React.createElement("div", { className: "text-xs text-slate-400 truncate" },
+                            r.element ? r.element + " · " : "",
+                            r.equipment,
+                            " \u00B7 ",
+                            r.userName,
+                            " \u00B7 ",
+                            fmt(r.created)))));
+            }),
+            React.createElement("button", { onClick: () => setShowSup((v) => !v), className: "text-xs text-slate-500 underline mx-auto block pt-2" }, showSup ? "Hide superseded records" : "Show superseded records")))));
+}
+/* ================= REVIEW ================= */
+function Review({ clusters, onOpen, onSupersede, onRestore, onDismiss }) {
+    return (React.createElement("div", { className: "space-y-4" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(GitMerge, { size: 18, className: "text-amber-400" }),
+            " Double-up review"),
+        clusters.length === 0 ? React.createElement(Empty, { Icon: CheckCircle2, title: "Register is clean", text: "No plant logged more than once. New double-ups appear here automatically as the crew syncs." }) : (React.createElement("div", { className: "space-y-3" }, clusters.map((cl) => {
+            const conflict = cl.type === "conflict";
+            return (React.createElement("div", { key: cl.key, className: `rounded-xl border p-3 space-y-3 ${conflict ? "border-red-500/40 bg-red-500/5" : "border-amber-500/40 bg-amber-500/5"}` },
+                React.createElement("div", { className: "flex items-center gap-2 flex-wrap" },
+                    React.createElement("span", { className: `text-xs font-semibold px-2 py-0.5 rounded-full border ${conflict ? "bg-red-500/20 text-red-300 border-red-500/50" : "bg-amber-400/20 text-amber-200 border-amber-400/50"}` }, conflict ? "Conflicting records" : "Possible double-up"),
+                    React.createElement("span", { className: "font-mono text-sm" }, cl.recs[0].plantId),
+                    React.createElement("span", { className: "text-xs text-slate-400" },
+                        "\u00B7 ",
+                        cl.recs.length,
+                        " records \u00B7 ",
+                        cl.users.length,
+                        " ",
+                        cl.users.length > 1 ? "people" : "person")),
+                conflict && React.createElement("p", { className: "text-xs text-red-200/80" }, "Same plant logged with different outcomes \u2014 resolve before close-out."),
+                React.createElement("div", { className: "text-[11px] text-slate-400 flex flex-wrap gap-x-4" },
+                    React.createElement("span", null,
+                        "By: ",
+                        cl.users.join(", ")),
+                    cl.spanMs > 0 && React.createElement("span", null,
+                        "Within: ",
+                        cl.spanMs < 36e5 ? Math.round(cl.spanMs / 6e4) + " min" : Math.round(cl.spanMs / 36e5) + " hr"),
+                    cl.dist != null && React.createElement("span", null,
+                        "GPS: ",
+                        cl.dist,
+                        " m")),
+                React.createElement("div", { className: "space-y-2" }, cl.recs.map((r) => {
+                    const sup = r.reviewState === "superseded";
+                    return (React.createElement("div", { key: r.id, className: `flex gap-2 items-center rounded-lg border border-slate-700 bg-slate-900 p-2 ${sup ? "opacity-50" : ""}` },
+                        React.createElement("button", { onClick: () => onOpen(r), className: "h-11 w-11 rounded bg-slate-800 overflow-hidden flex-shrink-0" }, r.photos[0] ? React.createElement("img", { src: r.photos[0].dataUrl, alt: "", className: "w-full h-full object-cover" }) : React.createElement(ImageIcon, { size: 16, className: "text-slate-600 m-auto" })),
+                        React.createElement("button", { onClick: () => onOpen(r), className: "min-w-0 flex-1 text-left" },
+                            React.createElement("div", { className: "flex items-center gap-2" },
+                                React.createElement("span", { className: "font-mono text-[11px] text-slate-400" }, r.ref),
+                                React.createElement(StatusChip, { status: r.status, severity: r.severity })),
+                            React.createElement("div", { className: "text-xs text-slate-400 truncate" },
+                                r.userName,
+                                " \u00B7 ",
+                                fmt(r.created))),
+                        sup ? React.createElement("button", { onClick: () => onRestore(r), className: "text-xs text-sky-300 border border-sky-500/40 rounded-lg px-2 py-1.5" }, "Restore") : React.createElement("button", { onClick: () => onSupersede(r), className: "text-xs text-slate-300 border border-slate-600 rounded-lg px-2 py-1.5 hover:border-red-400 hover:text-red-300" }, "Supersede")));
+                })),
+                React.createElement("button", { onClick: () => onDismiss(cl.key), className: "text-xs text-slate-400 hover:text-slate-200 underline" }, "Not a double-up \u2014 keep both")));
+        })))));
+}
+/* ================= PLAN (multi-sheet) ================= */
+function PlanView({ plan, config, sheetImgs, records, plants, onOpen, onPlan, onPlace }) {
+    const sheets = useMemo(() => {
+        const arr = [];
+        if (plan?.dataUrl)
+            arr.push({ key: "main", name: "GA overview", img: plan.dataUrl });
+        (config.sheets || []).forEach((s) => arr.push({ key: s.id, name: s.name, img: sheetImgs[s.id] }));
+        return arr;
+    }, [plan, config.sheets, sheetImgs]);
+    const [sheetKey, setSheetKey] = useState(sheets[0]?.key);
+    const [mode, setMode] = useState("records");
+    const [active, setActive] = useState(null);
+    const [allTags, setAllTags] = useState(false);
+    useEffect(() => { if (!sheets.find((s) => s.key === sheetKey))
+        setSheetKey(sheets[0]?.key); }, [sheets, sheetKey]);
+    const sheet = sheets.find((s) => s.key === sheetKey);
+    const reg = plants || [];
+    const onThis = reg.filter((p) => p.x != null && (p.sheet || "main") === sheetKey);
+    const matchArea = (p) => sheet && (p.area || "").toLowerCase() === sheet.name.toLowerCase();
+    const candidates = reg.filter((p) => p.x == null && (allTags || matchArea(p)));
+    const pinned = records.filter((r) => r.pin && r.reviewState !== "superseded" && pinSheet(r) === sheetKey);
+    if (sheets.length === 0)
+        return (React.createElement("div", { className: "space-y-4" },
+            React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+                React.createElement(MapIcon, { size: 18, className: "text-amber-400" }),
+                " Plan sheets"),
+            React.createElement(Empty, { Icon: MapIcon, title: "No plan sheets yet", text: "Add the GA as an overview plan, and import the per-bay sheets, in Setup \u2192 Plan sheets." }),
+            React.createElement("label", { className: "block" },
+                React.createElement("span", { className: "w-full inline-flex items-center justify-center gap-2 rounded-lg bg-amber-400 text-slate-950 font-semibold py-3 cursor-pointer hover:bg-amber-300" },
+                    React.createElement(Upload, { size: 16 }),
+                    " Upload overview plan"),
+                React.createElement("input", { type: "file", accept: "image/*", className: "hidden", onChange: async (e) => e.target.files[0] && onPlan({ dataUrl: await compressImage(e.target.files[0], 1800, 0.6) }) }))));
+    return (React.createElement("div", { className: "space-y-3" },
+        React.createElement("div", { className: "flex items-center justify-between gap-2" },
+            React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+                React.createElement(Layers, { size: 18, className: "text-amber-400" }),
+                " Plan sheets"),
+            React.createElement("div", { className: "flex rounded-lg border border-slate-700 overflow-hidden text-xs" },
+                React.createElement("button", { onClick: () => { setMode("records"); setActive(null); }, className: `px-3 py-1.5 ${mode === "records" ? "bg-amber-400 text-slate-950" : "text-slate-300"}` }, "Records"),
+                React.createElement("button", { onClick: () => setMode("place"), className: `px-3 py-1.5 ${mode === "place" ? "bg-amber-400 text-slate-950" : "text-slate-300"}` }, "Place plant"))),
+        React.createElement("select", { className: inputCls, value: sheetKey, onChange: (e) => { setSheetKey(e.target.value); setActive(null); } }, sheets.map((s) => React.createElement("option", { key: s.key, value: s.key },
+            s.name,
+            s.img ? "" : " (image missing)"))),
+        mode === "place" && (React.createElement("div", { className: "rounded-lg border border-slate-700 bg-slate-900 p-3 space-y-2" }, reg.length === 0 ? React.createElement("p", { className: "text-sm text-slate-400" }, "Add plant IDs in Setup \u2192 Plant register first.") : (React.createElement(React.Fragment, null,
+            React.createElement("div", { className: "text-xs text-slate-400 flex items-center justify-between gap-2" },
+                React.createElement("span", { className: "flex items-center gap-1.5" },
+                    React.createElement(Locate, { size: 13 }),
+                    " ",
+                    active ? React.createElement(React.Fragment, null,
+                        "Tap to drop ",
+                        React.createElement("span", { className: "font-mono text-amber-300" }, reg.find((p) => p.key === active)?.plantId),
+                        " on ",
+                        sheet?.name) : `${candidates.length} to place on ${sheet?.name}`),
+                React.createElement("button", { onClick: () => setAllTags((v) => !v), className: "underline whitespace-nowrap" }, allTags ? "this bay only" : "show all tags")),
+            React.createElement("div", { className: "flex gap-1.5 overflow-x-auto pb-1" }, [...candidates, ...onThis].map((p) => (React.createElement("button", { key: p.key, onClick: () => setActive(p.key), className: `whitespace-nowrap text-xs font-mono px-2.5 py-1.5 rounded-full border ${active === p.key ? "bg-amber-400 text-slate-950 border-amber-400" : p.x != null ? "border-emerald-500/40 text-emerald-300" : "border-slate-600 text-slate-300"}` },
+                p.x != null && "✓ ",
+                p.plantId)))))))),
+        sheet?.img ? (React.createElement(ZoomPan, { src: sheet.img, alt: sheet.name, placing: mode === "place" && !!active, onTap: (x, y) => { onPlace(active, { sheet: sheetKey, x, y }); setActive(null); } },
+            mode === "records" && pinned.map((r) => { const col = r.status === "defect" ? (SEVERITIES[r.severity]?.color || "#ef4444") : STATUSES[r.status].color; return React.createElement("button", { key: r.id, onClick: () => onOpen(r), className: "absolute -translate-x-1/2 -translate-y-full", style: { left: r.pin.x * 100 + "%", top: r.pin.y * 100 + "%" } },
+                React.createElement(MapPin, { size: 24, fill: col, style: { color: col } })); }),
+            mode === "place" && onThis.map((p) => (React.createElement("div", { key: p.key, className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center", style: { left: p.x * 100 + "%", top: p.y * 100 + "%" } },
+                React.createElement(CircleDot, { size: 15, className: "text-amber-400" }),
+                React.createElement("span", { className: "text-[9px] font-mono bg-slate-950/80 text-amber-200 px-1 rounded mt-0.5 leading-tight" }, p.plantId)))))) : React.createElement("div", { className: "rounded-xl border border-dashed border-slate-700 p-8 text-center text-sm text-slate-400" }, "Image for this sheet isn't loaded on this device."),
+        mode === "records" ? React.createElement("div", { className: "flex flex-wrap gap-3 text-xs text-slate-400" }, Object.entries({ Critical: SEVERITIES.Critical.color, Major: SEVERITIES.Major.color, Minor: SEVERITIES.Minor.color, Observation: STATUSES.observation.color, Conforming: STATUSES.conforming.color }).map(([k, c]) => React.createElement("span", { key: k, className: "inline-flex items-center gap-1" },
+            React.createElement(CircleDot, { size: 12, style: { color: c } }),
+            " ",
+            k))) : React.createElement("p", { className: "text-[11px] text-slate-500" },
+            onThis.length,
+            " placed on this sheet. Placing a tag lets Capture drop its pin (and sheet) automatically.")));
+}
+/* ================= SUMMARY ================= */
+function Summary({ records, config }) {
+    const live = records.filter((r) => r.reviewState !== "superseded");
+    const total = live.length;
+    const defects = live.filter((r) => r.status === "defect");
+    const open = defects.filter((r) => r.rectification?.state !== "closed").length;
+    const closed = defects.length - open;
+    const conf = live.filter((r) => r.status === "conforming").length;
+    const bySev = ["Critical", "Major", "Minor"].map((s) => ({ k: s, n: defects.filter((d) => d.severity === s).length, c: SEVERITIES[s].color }));
+    const byEl = config.elements.map((e) => ({ k: e, n: live.filter((r) => r.element === e).length })).filter((x) => x.n).sort((a, b) => b.n - a.n);
+    const byOwn = config.owners.map((o) => ({ k: o, n: live.filter((r) => r.owner === o).length })).filter((x) => x.n).sort((a, b) => b.n - a.n);
+    const byCat = config.categories.map((c) => ({ k: c, n: defects.filter((d) => d.category === c).length })).filter((x) => x.n).sort((a, b) => b.n - a.n);
+    return (React.createElement("div", { className: "space-y-6" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(BarChart3, { size: 18, className: "text-amber-400" }),
+            " Summary"),
+        React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" },
+            React.createElement(Stat, { label: "Inspections", value: total }),
+            React.createElement(Stat, { label: "Open defects", value: open, accent: "#ef4444" }),
+            React.createElement(Stat, { label: "Closed out", value: closed, accent: "#10b981" }),
+            React.createElement(Stat, { label: "Conformance", value: total ? Math.round((conf / total) * 100) + "%" : "—" })),
+        byEl.length > 0 && React.createElement(Panel, { title: "Records by work element" }, byEl.map((e) => React.createElement(Bar, { key: e.k, label: e.k, n: e.n, max: byEl[0].n, color: "#a78bfa" }))),
+        byOwn.length > 0 && React.createElement(Panel, { title: "Records by owner" }, byOwn.map((o) => React.createElement(Bar, { key: o.k, label: o.k, n: o.n, max: byOwn[0].n, color: "#38bdf8" }))),
+        defects.length > 0 && React.createElement(Panel, { title: "Defects by severity" }, bySev.map((s) => React.createElement(Bar, { key: s.k, label: s.k, n: s.n, max: defects.length, color: s.c }))),
+        byCat.length > 0 && React.createElement(Panel, { title: "Defects by category" }, byCat.map((c) => React.createElement(Bar, { key: c.k, label: c.k, n: c.n, max: byCat[0].n, color: "#fbbf24" }))),
+        total === 0 && React.createElement(Empty, { Icon: BarChart3, title: "Nothing to summarise yet", text: "Logged records roll up here automatically." })));
+}
+function Stat({ label, value, accent }) { return React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-3" },
+    React.createElement("div", { className: "text-2xl font-semibold font-mono", style: accent ? { color: accent } : undefined }, value),
+    React.createElement("div", { className: "text-xs text-slate-400 mt-0.5" }, label)); }
+function Panel({ title, children }) { return React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-4 space-y-2.5" },
+    React.createElement("div", { className: "text-sm font-medium text-slate-300" }, title),
+    children); }
+function Bar({ label, n, max, color }) { return React.createElement("div", { className: "flex items-center gap-3 text-sm" },
+    React.createElement("div", { className: "w-40 truncate text-slate-400 text-xs" }, label),
+    React.createElement("div", { className: "flex-1 h-2.5 rounded-full bg-slate-800 overflow-hidden" },
+        React.createElement("div", { className: "h-full rounded-full", style: { width: (max ? (n / max) * 100 : 0) + "%", background: color } })),
+    React.createElement("div", { className: "w-6 text-right font-mono text-xs" }, n)); }
+/* ================= DETAIL ================= */
+function DetailSheet({ record, getImg, user, onClose, onEdit, onSave, onDelete }) {
+    const r = record;
+    const isDefect = r.status === "defect";
+    const closed = r.rectification?.state === "closed";
+    const [closeNotes, setCloseNotes] = useState(r.rectification?.closeoutNotes || "");
+    const [closePhotos, setClosePhotos] = useState(r.rectification?.closeoutPhotos || []);
+    const addClosePhotos = async (files) => { const arr = []; for (const file of files) {
+        try {
+            arr.push({ id: rid(), dataUrl: await compressImage(file) });
+        }
+        catch { }
+    } setClosePhotos((p) => [...p, ...arr]); };
+    const closeOut = () => { onSave({ ...r, rectification: { state: "closed", closedDate: Date.now(), closedBy: user.name, closeoutNotes: closeNotes, closeoutPhotos: closePhotos }, updatedAt: Date.now(), sync: "pending" }); onClose(); };
+    const reopen = () => { onSave({ ...r, rectification: { ...r.rectification, state: "open", reopenedBy: user.name, reopenedDate: Date.now() }, updatedAt: Date.now(), sync: "pending" }); onClose(); };
+    const pinImg = r.pin ? getImg(pinSheet(r)) : null;
+    return (React.createElement("div", { className: "fixed inset-0 z-30 bg-slate-950/70 flex items-end sm:items-center justify-center", onClick: onClose },
+        React.createElement("div", { className: "bg-slate-900 w-full sm:max-w-lg sm:rounded-2xl rounded-t-2xl max-h-[92vh] overflow-y-auto border border-slate-800", onClick: (e) => e.stopPropagation() },
+            React.createElement("div", { className: "sticky top-0 bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center gap-2" },
+                React.createElement("button", { onClick: onClose, className: "text-slate-400 hover:text-slate-200" },
+                    React.createElement(ChevronLeft, { size: 20 })),
+                React.createElement("span", { className: "font-mono text-sm text-slate-400" }, r.ref),
+                React.createElement(StatusChip, { status: r.status, severity: r.severity }),
+                React.createElement("div", { className: "ml-auto flex gap-1" },
+                    React.createElement("button", { onClick: () => onEdit(r), className: "p-2 text-slate-400 hover:text-amber-400" },
+                        React.createElement(Pencil, { size: 16 })),
+                    React.createElement("button", { onClick: () => { if (confirm("Delete this record?"))
+                            onDelete(r.id); }, className: "p-2 text-slate-400 hover:text-red-400" },
+                        React.createElement(Trash2, { size: 16 })))),
+            React.createElement("div", { className: "p-4 space-y-4" },
+                r.photos.length > 0 && React.createElement("div", { className: "grid grid-cols-2 gap-2" }, r.photos.map((p) => React.createElement("img", { key: p.id, src: p.dataUrl, alt: "", className: "w-full rounded-lg border border-slate-800" }))),
+                React.createElement("div", { className: "font-mono text-lg font-semibold" }, r.plantId),
+                React.createElement("dl", { className: "grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm" },
+                    React.createElement(Row, { k: "Work element", v: r.element }),
+                    React.createElement(Row, { k: "Owner", v: r.owner }),
+                    React.createElement(Row, { k: "Equipment", v: r.equipment }),
+                    React.createElement(Row, { k: "Site", v: r.site }),
+                    React.createElement(Row, { k: "Area / zone", v: r.area }),
+                    isDefect && React.createElement(Row, { k: "Category", v: r.category }),
+                    React.createElement(Row, { k: "Drawing", v: r.drawingRef, mono: true }),
+                    React.createElement(Row, { k: "ITP / lot", v: r.itpRef, mono: true }),
+                    React.createElement(Row, { k: "NCR", v: r.ncr, mono: true }),
+                    React.createElement(Row, { k: "Inspector", v: r.userName }),
+                    React.createElement(Row, { k: "Logged", v: fmt(r.created) }),
+                    r.gps && React.createElement(Row, { k: "GPS", v: `${r.gps.lat}, ${r.gps.lng} (±${r.gps.acc}m)`, mono: true })),
+                r.description && React.createElement("p", { className: "text-sm text-slate-300 bg-slate-800/60 rounded-lg p-3 whitespace-pre-wrap" }, r.description),
+                pinImg && React.createElement("div", { className: "relative rounded-lg overflow-hidden border border-slate-800" },
+                    React.createElement("img", { src: pinImg, alt: "", className: "w-full" }),
+                    React.createElement("div", { className: "absolute -translate-x-1/2 -translate-y-full", style: { left: r.pin.x * 100 + "%", top: r.pin.y * 100 + "%" } },
+                        React.createElement(MapPin, { size: 24, fill: "#fbbf24", className: "text-amber-400" }))),
+                isDefect && (React.createElement("div", { className: `rounded-xl border p-3 space-y-3 ${closed ? "border-emerald-500/40 bg-emerald-500/5" : "border-orange-500/40 bg-orange-500/5"}` },
+                    React.createElement("div", { className: "flex items-center gap-2 text-sm font-medium" },
+                        React.createElement(Wrench, { size: 15 }),
+                        " Rectification \u2014 ",
+                        closed ? "closed" : "open"),
+                    closed ? (React.createElement(React.Fragment, null,
+                        React.createElement("div", { className: "text-xs text-slate-400" },
+                            "Closed by ",
+                            React.createElement("span", { className: "text-slate-200" }, r.rectification.closedBy || "—"),
+                            " \u00B7 ",
+                            fmt(r.rectification.closedDate)),
+                        r.rectification.closeoutNotes && React.createElement("p", { className: "text-sm text-slate-300" }, r.rectification.closeoutNotes),
+                        r.rectification.closeoutPhotos?.length > 0 && React.createElement("div", { className: "flex gap-2 flex-wrap" }, r.rectification.closeoutPhotos.map((p) => React.createElement("img", { key: p.id, src: p.dataUrl, alt: "", className: "h-16 w-16 object-cover rounded-lg border border-slate-700" }))),
+                        React.createElement("button", { onClick: reopen, className: "w-full rounded-lg py-2.5 text-sm font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700" }, "Re-open defect"))) : (React.createElement(React.Fragment, null,
+                        React.createElement("textarea", { className: inputCls + " min-h-16", placeholder: "Close-out notes / action taken\u2026", value: closeNotes, onChange: (e) => setCloseNotes(e.target.value) }),
+                        React.createElement("div", { className: "flex gap-2 items-center flex-wrap" },
+                            React.createElement("span", { className: "text-[11px] text-slate-400 w-full" }, "Photo evidence (optional)"),
+                            closePhotos.map((p) => React.createElement("img", { key: p.id, src: p.dataUrl, alt: "", className: "h-14 w-14 object-cover rounded-lg border border-slate-700" })),
+                            React.createElement("label", { className: "h-14 w-14 rounded-lg border border-dashed border-slate-600 flex items-center justify-center cursor-pointer text-slate-400 hover:border-amber-400" },
+                                React.createElement(Plus, { size: 18 }),
+                                React.createElement("input", { type: "file", accept: "image/*", capture: "environment", multiple: true, className: "hidden", onChange: (e) => { addClosePhotos([...e.target.files]); e.target.value = ""; } }))),
+                        React.createElement("button", { onClick: closeOut, className: "w-full rounded-lg py-2.5 text-sm font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400" },
+                            "Close out \u2014 ",
+                            fmt(Date.now())),
+                        React.createElement("p", { className: "text-[11px] text-slate-500 text-center" }, "Stamped with your name and the current time. Anyone can re-open it later.")))))))));
+}
+function Row({ k, v, mono }) { if (!v)
+    return null; return React.createElement("div", null,
+    React.createElement("dt", { className: "text-[11px] uppercase tracking-wide text-slate-500" }, k),
+    React.createElement("dd", { className: "text-slate-200 " + (mono ? "font-mono text-sm" : "") }, v)); }
+/* ================= EDIT ================= */
+function EditModal({ record, config, onClose, onSave }) {
+    const [f, setF] = useState(record);
+    const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
+    return (React.createElement("div", { className: "fixed inset-0 z-40 bg-slate-950/70 flex items-end sm:items-center justify-center", onClick: onClose },
+        React.createElement("div", { className: "bg-slate-900 w-full sm:max-w-lg sm:rounded-2xl rounded-t-2xl max-h-[92vh] overflow-y-auto border border-slate-800 p-4 space-y-4", onClick: (e) => e.stopPropagation() },
+            React.createElement("div", { className: "flex items-center justify-between" },
+                React.createElement("h3", { className: "font-semibold" },
+                    "Edit ",
+                    record.ref),
+                React.createElement("button", { onClick: onClose, className: "text-slate-400" },
+                    React.createElement(X, { size: 18 }))),
+            React.createElement(Field, { label: "Plant identifier" },
+                React.createElement("input", { className: inputCls + " font-mono", value: f.plantId, onChange: (e) => set("plantId", e.target.value) })),
+            React.createElement("div", { className: "grid grid-cols-2 gap-3" },
+                React.createElement(Field, { label: "Work element" },
+                    React.createElement("select", { className: inputCls, value: f.element || "", onChange: (e) => set("element", e.target.value) }, config.elements.map((x) => React.createElement("option", { key: x }, x)))),
+                React.createElement(Field, { label: "Owner" },
+                    React.createElement("select", { className: inputCls, value: f.owner || "", onChange: (e) => set("owner", e.target.value) }, config.owners.map((x) => React.createElement("option", { key: x }, x))))),
+            React.createElement("div", { className: "grid grid-cols-2 gap-3" },
+                React.createElement(Field, { label: "Equipment" },
+                    React.createElement("select", { className: inputCls, value: f.equipment, onChange: (e) => set("equipment", e.target.value) }, config.equipment.map((x) => React.createElement("option", { key: x }, x)))),
+                React.createElement(Field, { label: "Area / zone" },
+                    React.createElement("input", { className: inputCls, value: f.area, onChange: (e) => set("area", e.target.value) }))),
+            React.createElement(Field, { label: "Outcome" },
+                React.createElement(Segmented, { value: f.status, onChange: (v) => set("status", v), options: [{ value: "conforming", label: "Conforming", color: STATUSES.conforming.color }, { value: "observation", label: "Observation", color: STATUSES.observation.color }, { value: "defect", label: "Defect", color: STATUSES.defect.color }] })),
+            f.status === "defect" && React.createElement("div", { className: "grid grid-cols-2 gap-3" },
+                React.createElement(Field, { label: "Severity" },
+                    React.createElement("select", { className: inputCls, value: f.severity, onChange: (e) => set("severity", e.target.value) }, Object.keys(SEVERITIES).map((s) => React.createElement("option", { key: s }, s)))),
+                React.createElement(Field, { label: "Category" },
+                    React.createElement("select", { className: inputCls, value: f.category, onChange: (e) => set("category", e.target.value) }, config.categories.map((c) => React.createElement("option", { key: c }, c))))),
+            React.createElement(Field, { label: "Description" },
+                React.createElement("textarea", { className: inputCls + " min-h-20", value: f.description, onChange: (e) => set("description", e.target.value) })),
+            React.createElement("div", { className: "grid grid-cols-2 gap-3" },
+                React.createElement(Field, { label: "Drawing ref" },
+                    React.createElement("input", { className: inputCls + " font-mono", value: f.drawingRef, onChange: (e) => set("drawingRef", e.target.value) })),
+                React.createElement(Field, { label: "ITP / lot" },
+                    React.createElement("input", { className: inputCls + " font-mono", value: f.itpRef, onChange: (e) => set("itpRef", e.target.value) }))),
+            React.createElement("button", { onClick: () => onSave({ ...f, rectification: f.status === "defect" ? (f.rectification || { state: "open", closedDate: null, closedBy: "", closeoutNotes: "", closeoutPhotos: [] }) : null }), className: "w-full rounded-lg bg-amber-400 text-slate-950 font-semibold py-3 hover:bg-amber-300" }, "Save changes"))));
+}
+/* ================= USER ================= */
+function UserPanel({ user, device, records, online, onSignOut, onRename }) {
+    const [name, setName] = useState(user.name);
+    const mine = records.filter((r) => r.userId === user.userId).length;
+    return (React.createElement("div", { className: "space-y-5" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(Users, { size: 18, className: "text-amber-400" }),
+            " Signed in"),
+        React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-4 space-y-3" },
+            React.createElement("div", { className: "flex items-center gap-3" },
+                React.createElement("div", { className: "h-12 w-12 rounded-full bg-slate-700 flex items-center justify-center font-semibold text-lg" }, user.initials),
+                React.createElement("div", null,
+                    React.createElement("div", { className: "font-medium" }, user.name),
+                    React.createElement("div", { className: "text-xs text-slate-400 font-mono" },
+                        "device ",
+                        device.slice(0, 6),
+                        " \u00B7 ",
+                        mine,
+                        " records here \u00B7 ",
+                        online ? "online" : "offline"))),
+            React.createElement(Field, { label: "Display name" },
+                React.createElement("input", { className: inputCls, value: name, onChange: (e) => setName(e.target.value) })),
+            React.createElement("button", { onClick: () => name.trim() && onRename(name.trim()), className: "w-full rounded-lg bg-amber-400 text-slate-950 font-semibold py-2.5" }, "Update name")),
+        React.createElement("button", { onClick: () => { if (confirm("Sign out on this device? Synced records stay in the register."))
+                onSignOut(); }, className: "w-full rounded-lg border border-slate-700 bg-slate-800 py-2.5 text-sm flex items-center justify-center gap-2 hover:border-red-400 hover:text-red-300" },
+            React.createElement(LogOut, { size: 15 }),
+            " Sign out")));
+}
+/* ================= SETUP ================= */
+function Setup({ config, onConfig, records, plan, onPlan, sheetImgs, onAddSheet, onImportSheets, onDeleteSheet, onImport, lastSync, project }) {
+    const fileRef = useRef(null);
+    const sheetsRef = useRef(null);
+    const addRef = useRef(null);
+    const [addName, setAddName] = useState("");
+    const exportCSV = () => {
+        const cols = ["ref", "created", "inspector", "site", "area", "plantId", "equipment", "element", "owner", "status", "severity", "category", "description", "drawingRef", "itpRef", "ncr", "gps_lat", "gps_lng", "rect_state", "closed_by", "closed_date", "reviewState", "photos"];
+        const rows = records.map((r) => [r.ref, new Date(r.created).toISOString(), r.userName, r.site, r.area, r.plantId, r.equipment, r.element || "", r.owner || "", r.status, r.status === "defect" ? r.severity : "", r.status === "defect" ? r.category : "", r.description, r.drawingRef, r.itpRef, r.ncr, r.gps?.lat ?? "", r.gps?.lng ?? "", r.rectification?.state ?? "", r.rectification?.closedBy ?? "", r.rectification?.closedDate ? new Date(r.rectification.closedDate).toISOString() : "", r.reviewState || "active", r.photos.length].map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","));
+        download(new Blob([cols.join(",") + "\n" + rows.join("\n")], { type: "text/csv" }), `${(project?.name || "SiteQA").replace(/\s+/g, "_")}_register_${Date.now()}.csv`);
+    };
+    const exportJSON = () => download(new Blob([JSON.stringify({ version: 3, config, records, plan }, null, 2)], { type: "application/json" }), `${(project?.name || "SiteQA").replace(/\s+/g, "_")}_backup_${Date.now()}.json`);
+    const importJSON = async (file) => {
+        let data;
+        try {
+            data = JSON.parse(await file.text());
+        }
+        catch {
+            alert("Couldn't read that file as JSON.");
+            return;
+        }
+        if (Array.isArray(data)) {
+            const valid = data.filter((s) => s && s.name && s.dataUrl);
+            if (valid.length) {
+                await onImportSheets(valid);
+                alert(`Imported ${valid.length} plan sheets into "${project?.name}". Open the Plan tab to see them.`);
+            }
+            else
+                alert("That looks like a JSON list but not a sheets bundle.");
+            return;
+        }
+        const cfg = data.config;
+        const plantN = cfg?.plants?.length || 0;
+        const recN = (data.records || []).length;
+        if (data.plan)
+            onPlan(data.plan);
+        await onImport(data.records || [], cfg);
+        const parts = [];
+        if (plantN)
+            parts.push(`${plantN} plant items`);
+        if (data.plan?.dataUrl)
+            parts.push("site plan");
+        if (recN)
+            parts.push(`${recN} records`);
+        alert(parts.length
+            ? `Loaded ${parts.join(" + ")} into "${project?.name}". Check Setup \u2192 Plant register and the Plan tab.`
+            : "Nothing recognised in that file \u2014 expected a SiteQA seed or backup.");
+    };
+    const importSheetsFile = async (file) => { try {
+        const arr = JSON.parse(await file.text());
+        if (!Array.isArray(arr))
+            throw 0;
+        await onImportSheets(arr.filter((s) => s.name && s.dataUrl));
+        alert(`Imported ${arr.length} plan sheets.`);
+    }
+    catch {
+        alert("Couldn't read that as a sheets bundle (expected [{name, dataUrl}]).");
+    } };
+    const sheets = config.sheets || [];
+    return (React.createElement("div", { className: "space-y-6" },
+        React.createElement("h2", { className: "text-lg font-semibold flex items-center gap-2" },
+            React.createElement(Settings, { size: 18, className: "text-amber-400" }),
+            " Setup"),
+        React.createElement("div", { className: "rounded-lg border border-slate-700 bg-slate-800/50 px-3 py-2 text-xs text-slate-300 flex items-center gap-2" },
+            React.createElement(Database, { size: 14, className: "text-amber-400" }),
+            " Active database: ",
+            React.createElement("span", { className: "font-medium text-slate-100" }, project?.name)),
+        React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-4 space-y-3" },
+            React.createElement("div", { className: "text-sm font-medium flex items-center gap-2" },
+                React.createElement(Download, { size: 15 }),
+                " Data & reports"),
+            React.createElement("div", { className: "grid grid-cols-2 gap-2" },
+                React.createElement("button", { onClick: exportCSV, className: "rounded-lg border border-slate-700 bg-slate-800 py-2.5 text-sm hover:border-amber-400" }, "Export CSV"),
+                React.createElement("button", { onClick: exportJSON, className: "rounded-lg border border-slate-700 bg-slate-800 py-2.5 text-sm hover:border-amber-400" }, "Backup (JSON)")),
+            React.createElement("button", { onClick: () => fileRef.current.click(), className: "w-full rounded-lg border border-slate-700 bg-slate-800 py-2.5 text-sm hover:border-amber-400 flex items-center justify-center gap-2" },
+                React.createElement(Upload, { size: 15 }),
+                " Restore / seed into this database"),
+            React.createElement("input", { ref: fileRef, type: "file", accept: "application/json", className: "hidden", onChange: (e) => e.target.files[0] && importJSON(e.target.files[0]) }),
+            React.createElement("p", { className: "text-[11px] text-slate-500" },
+                lastSync ? `Last synced ${fmt(lastSync)}. ` : "",
+                "Restore loads into the active database only.")),
+        React.createElement(PlantRegister, { config: config, onConfig: onConfig }),
+        React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-4 space-y-3" },
+            React.createElement("div", { className: "text-sm font-medium flex items-center gap-2" },
+                React.createElement(Layers, { size: 15, className: "text-amber-400" }),
+                " Plan sheets"),
+            React.createElement("p", { className: "text-[11px] text-slate-400" }, "An overview plan (the GA) plus a sheet per bay. Import the per-bay bundle in one go, then pin each tag on its own bay in the Plan tab."),
+            React.createElement("div", { className: "rounded-lg border border-slate-700 p-2.5 space-y-1.5" },
+                React.createElement("div", { className: "text-xs text-slate-300 flex items-center justify-between" },
+                    React.createElement("span", null, "GA overview plan"),
+                    plan ? React.createElement("span", { className: "text-emerald-400 text-[11px]" }, "loaded") : React.createElement("span", { className: "text-slate-500 text-[11px]" }, "none")),
+                React.createElement("label", { className: "block" },
+                    React.createElement("span", { className: "w-full inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800 py-2 text-xs cursor-pointer hover:border-amber-400" },
+                        React.createElement(Upload, { size: 13 }),
+                        " ",
+                        plan ? "Replace overview" : "Upload overview"),
+                    React.createElement("input", { type: "file", accept: "image/*", className: "hidden", onChange: async (e) => e.target.files[0] && onPlan({ dataUrl: await compressImage(e.target.files[0], 1800, 0.6) }) }))),
+            React.createElement("button", { onClick: () => sheetsRef.current.click(), className: "w-full rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-300 py-2.5 text-sm flex items-center justify-center gap-2" },
+                React.createElement(Upload, { size: 15 }),
+                " Import per-bay sheets bundle"),
+            React.createElement("input", { ref: sheetsRef, type: "file", accept: "application/json", className: "hidden", onChange: (e) => e.target.files[0] && importSheetsFile(e.target.files[0]) }),
+            sheets.length > 0 && React.createElement("div", { className: "space-y-1.5" }, sheets.map((s) => (React.createElement("div", { key: s.id, className: "flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 p-2 text-sm" },
+                React.createElement(Layers, { size: 13, className: sheetImgs[s.id] ? "text-emerald-400" : "text-slate-500" }),
+                React.createElement("span", { className: "flex-1 truncate" }, s.name),
+                React.createElement("button", { onClick: () => { if (confirm(`Remove sheet "${s.name}"?`))
+                        onDeleteSheet(s.id); }, className: "text-slate-500 hover:text-red-400" },
+                    React.createElement(X, { size: 14 })))))),
+            React.createElement("div", { className: "flex gap-2" },
+                React.createElement("input", { className: inputCls, value: addName, onChange: (e) => setAddName(e.target.value), placeholder: "Add one sheet \u2014 name\u2026" }),
+                React.createElement("button", { onClick: () => addName.trim() && addRef.current.click(), className: "rounded-lg bg-slate-800 border border-slate-700 px-3 hover:border-amber-400" },
+                    React.createElement(Upload, { size: 15 })),
+                React.createElement("input", { ref: addRef, type: "file", accept: "image/*", className: "hidden", onChange: async (e) => { if (e.target.files[0] && addName.trim()) {
+                        await onAddSheet(addName.trim(), await compressImage(e.target.files[0], 2000, 0.7));
+                        setAddName("");
+                    } e.target.value = ""; } }))),
+        React.createElement(ListEditor, { title: "Work elements", items: config.elements, onChange: (v) => onConfig({ ...config, elements: v }) }),
+        React.createElement(ListEditor, { title: "Owners", items: config.owners, onChange: (v) => onConfig({ ...config, owners: v }) }),
+        React.createElement(ListEditor, { title: "Sites", items: config.sites, onChange: (v) => onConfig({ ...config, sites: v }) }),
+        React.createElement(ListEditor, { title: "Areas / zones", items: config.areas, onChange: (v) => onConfig({ ...config, areas: v }) }),
+        React.createElement(ListEditor, { title: "Equipment types", items: config.equipment, onChange: (v) => onConfig({ ...config, equipment: v }) }),
+        React.createElement(ListEditor, { title: "Defect categories", items: config.categories, onChange: (v) => onConfig({ ...config, categories: v }) })));
+}
+function PlantRegister({ config, onConfig }) {
+    const plants = config.plants || [];
+    const [paste, setPaste] = useState("");
+    const [eqDefault, setEqDefault] = useState(config.equipment[0] || "");
+    const [ownDefault, setOwnDefault] = useState(config.owners[0] || "");
+    const placed = plants.filter((p) => p.x != null).length;
+    const addPasted = () => { const lines = paste.split(/[\n,]/).map((s) => s.trim()).filter(Boolean); const existing = new Set(plants.map((p) => p.key)); const add = []; lines.forEach((l) => { const key = normId(l); if (key && !existing.has(key)) {
+        existing.add(key);
+        add.push({ key, plantId: l, equipment: eqDefault, area: "", owner: ownDefault, x: null, y: null });
+    } }); if (add.length)
+        onConfig({ ...config, plants: [...plants, ...add] }); setPaste(""); };
+    const setField = (key, field, val) => onConfig({ ...config, plants: plants.map((p) => (p.key === key ? { ...p, [field]: val } : p)) });
+    const remove = (key) => onConfig({ ...config, plants: plants.filter((p) => p.key !== key) });
+    return (React.createElement("div", { className: "rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-3" },
+        React.createElement("div", { className: "text-sm font-medium flex items-center gap-2" },
+            React.createElement(ListChecks, { size: 15, className: "text-amber-400" }),
+            " Plant register"),
+        React.createElement("p", { className: "text-[11px] text-slate-400" }, "Paste plant IDs from the SLD. Set default equipment & owner first; override per item below."),
+        React.createElement("div", { className: "grid grid-cols-2 gap-2" },
+            React.createElement(Field, { label: "Default equipment" },
+                React.createElement("select", { className: inputCls, value: eqDefault, onChange: (e) => setEqDefault(e.target.value) }, config.equipment.map((eq) => React.createElement("option", { key: eq }, eq)))),
+            React.createElement(Field, { label: "Default owner" },
+                React.createElement("select", { className: inputCls, value: ownDefault, onChange: (e) => setOwnDefault(e.target.value) }, config.owners.map((o) => React.createElement("option", { key: o }, o))))),
+        React.createElement("textarea", { className: inputCls + " min-h-20 font-mono text-xs", value: paste, onChange: (e) => setPaste(e.target.value), placeholder: "1A1B\naAB" }),
+        React.createElement("button", { onClick: addPasted, disabled: !paste.trim(), className: "w-full rounded-lg bg-amber-400 text-slate-950 font-semibold py-2.5 disabled:opacity-40" }, "Add to register"),
+        plants.length > 0 && (React.createElement(React.Fragment, null,
+            React.createElement("div", { className: "text-xs text-slate-400" },
+                plants.length,
+                " plant IDs \u00B7 ",
+                placed,
+                " placed"),
+            React.createElement("div", { className: "max-h-72 overflow-y-auto space-y-1.5" }, plants.map((p) => (React.createElement("div", { key: p.key, className: "flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-900 p-2" },
+                p.x != null ? React.createElement(CircleDot, { size: 13, className: "text-emerald-400 flex-shrink-0" }) : React.createElement(CircleDot, { size: 13, className: "text-slate-600 flex-shrink-0" }),
+                React.createElement("span", { className: "font-mono text-xs flex-shrink-0 w-16 truncate" }, p.plantId),
+                React.createElement("select", { className: "flex-1 min-w-0 bg-slate-800 border border-slate-700 rounded px-1 py-1 text-[11px] text-slate-200", value: p.equipment, onChange: (e) => setField(p.key, "equipment", e.target.value) }, config.equipment.map((eq) => React.createElement("option", { key: eq }, eq))),
+                React.createElement("select", { className: "w-16 flex-shrink-0 bg-slate-800 border border-slate-700 rounded px-1 py-1 text-[11px] text-slate-200", value: p.owner || "", onChange: (e) => setField(p.key, "owner", e.target.value) }, config.owners.map((o) => React.createElement("option", { key: o }, o))),
+                React.createElement("button", { onClick: () => remove(p.key), className: "text-slate-500 hover:text-red-400 flex-shrink-0" },
+                    React.createElement(X, { size: 14 }))))))))));
+}
+function ListEditor({ title, items, onChange }) {
+    const [val, setVal] = useState("");
+    return React.createElement("div", { className: "rounded-xl border border-slate-800 bg-slate-900 p-4 space-y-2" },
+        React.createElement("div", { className: "text-sm font-medium" }, title),
+        React.createElement("div", { className: "flex flex-wrap gap-2" }, items.map((it) => React.createElement("span", { key: it, className: "inline-flex items-center gap-1 text-xs bg-slate-800 border border-slate-700 rounded-full pl-3 pr-1 py-1" },
+            it,
+            React.createElement("button", { onClick: () => onChange(items.filter((x) => x !== it)), className: "text-slate-500 hover:text-red-400" },
+                React.createElement(X, { size: 13 }))))),
+        React.createElement("div", { className: "flex gap-2" },
+            React.createElement("input", { className: inputCls, value: val, onChange: (e) => setVal(e.target.value), placeholder: `Add ${title.toLowerCase()}…`, onKeyDown: (e) => { if (e.key === "Enter" && val.trim()) {
+                    onChange([...items, val.trim()]);
+                    setVal("");
+                } } }),
+            React.createElement("button", { onClick: () => { if (val.trim()) {
+                    onChange([...items, val.trim()]);
+                    setVal("");
+                } }, className: "rounded-lg bg-slate-800 border border-slate-700 px-3 hover:border-amber-400" },
+                React.createElement(Plus, { size: 16 }))));
+}
+function download(blob, name) { const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+const _el = document.getElementById("root");
+if (_el)
+    createRoot(_el).render(React.createElement(App));
+
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (refreshing) return; refreshing = true; location.reload(); });
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").then(r => r.update()).catch(()=>{}));
+}
+</script>
+</body>
+</html>
