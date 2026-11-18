@@ -307,6 +307,8 @@ export default function App() {
                         syncing ? React.createElement(RefreshCw, { size: 13, className: "animate-spin" }) : online && syncAdapter.available ? React.createElement(Cloud, { size: 13 }) : React.createElement(CloudOff, { size: 13 }),
                         pending > 0 ? pending : online ? React.createElement(Check, { size: 13 }) : "off"),
                     React.createElement("button", { onClick: () => setView("user"), className: "h-7 w-7 rounded-full bg-slate-700 text-xs font-semibold flex items-center justify-center", title: user.name }, user.initials),
+                    React.createElement("a", { href: "./diary/", title: "Site diary", "aria-label": "Site diary", className: "text-slate-400 hover:text-amber-400 p-1" },
+                        React.createElement(ListChecks, { size: 18 })),
                     React.createElement("button", { onClick: () => setView("setup"), className: "text-slate-400 hover:text-amber-400 p-1" },
                         React.createElement(Settings, { size: 18 }))))),
         React.createElement("main", { className: "flex-1 max-w-3xl w-full mx-auto px-4 pb-28 pt-4" },
